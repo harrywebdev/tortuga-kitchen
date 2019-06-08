@@ -1,0 +1,16 @@
+html, body {
+    height: 100%;
+
+    * {
+        box-sizing: border-box;
+    }
+}
+
+body {
+    background: #fafafa;
+
+    & > div {
+        height: 100%;
+    }
+}
+

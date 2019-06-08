@@ -1,3 +1,20 @@
-body {
-    background: #fafafa;
+.application-layout {
+    @extend .container;
+    height: 100%;
+}
+
+.application-layout__full-screen-rows {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: stretch;
+
+    & > .columns {
+        @extend .is-marginless;
+
+        &:nth-child(2) {
+            flex-grow: 2;
+        }
+    }
 }
