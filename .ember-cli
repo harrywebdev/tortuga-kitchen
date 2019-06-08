@@ -1,4 +1,5 @@
 {
     "disableAnalytics": false,
-    "host": "tortuga.kitchen.test"
+    "host": "tortuga.kitchen.test",
+    "port": 4201
 }

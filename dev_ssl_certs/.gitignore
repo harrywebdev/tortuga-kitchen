@@ -3,5 +3,5 @@
 # make sure to put `localhost` for `Subject Alternate Name (SAN)` on the generated cert to be valid on localhost
 
 device.key
-tortuga.frontend.test.*
+tortuga.kitchen.test.*
 rootCA.*
