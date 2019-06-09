@@ -7,7 +7,7 @@ export default class OrderCardComponent extends Component {
 
     classNames = ['order-card', 'card'];
 
-    slotTime = '';
+    pickupTime = '';
     hasOptionsMenuOpen = false;
 
     get randomBurgers() {

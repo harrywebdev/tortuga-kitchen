@@ -7,6 +7,10 @@
     &.order-thumb-card---selected {
         background: rgba($success, 0.1);
     }
+
+    &.order-thumb-card--overload {
+        background: rgba($red, 0.1);
+    }
 }
 
 .order-thumb-card__slot-time {

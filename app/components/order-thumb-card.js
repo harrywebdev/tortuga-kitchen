@@ -2,35 +2,40 @@ import Component from '@ember/component';
 import { action } from '@ember/object';
 
 export default class OrderThumbCardComponent extends Component {
-    classNames = ['order-thumb-card', 'card'];
-    classNameBindings = ['isSelected:order-thumb-card---selected'];
+                   classNames = ['order-thumb-card', 'card'];
+                   classNameBindings = [
+                       'isSelected:order-thumb-card---selected',
+                       'isOverload:order-thumb-card--overload',
+                   ];
 
-    isSelected = false;
-    slotTime = '';
+                   isSelected = false;
+                   pickupTime = '';
 
-    get customerStatus() {
-        // HACK: implement actual customer status
-        return ['new', 'trusted', 'strange'][Math.floor(Math.random() * Math.floor(2))];
-    }
+                   isOverload = false;
 
-    get randomBurgers() {
-        return Math.floor(Math.random() * Math.floor(4));
-    }
+                   get customerStatus() {
+                       // HACK: implement actual customer status
+                       return ['new', 'trusted', 'strange'][Math.floor(Math.random() * Math.floor(2))];
+                   }
 
-    get randomSides() {
-        return Math.floor(Math.random() * Math.floor(4));
-    }
+                   get randomBurgers() {
+                       return Math.floor(Math.random() * Math.floor(4));
+                   }
 
-    get randomDrinks() {
-        return Math.floor(Math.random() * Math.floor(4));
-    }
+                   get randomSides() {
+                       return Math.floor(Math.random() * Math.floor(4));
+                   }
 
-    click() {
-        this.toggleProperty('isSelected');
-    }
+                   get randomDrinks() {
+                       return Math.floor(Math.random() * Math.floor(4));
+                   }
 
-    @action
-    toggleSelection() {
-        this.toggleProperty('isSelected');
-    }
-}
+                   click() {
+                       this.toggleProperty('isSelected');
+                   }
+
+                   @action
+                   toggleSelection() {
+                       this.toggleProperty('isSelected');
+                   }
+               }
