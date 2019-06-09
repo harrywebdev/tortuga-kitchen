@@ -1,0 +1,32 @@
+.order-card {
+    //
+}
+
+.order-card__done-button {
+    background: $primary;
+}
+
+.order-card__header-items {
+    @extend .order-thumb-card__items;
+}
+
+.order-card__header-item {
+    @extend .order-thumb-card__item;
+    font-size: $size-5 !important;
+    margin: 0 4px !important;
+}
+
+.order-card__content {
+    padding: 0.75rem;
+}
+
+.order-card__items {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.order-card__item {
+    margin-bottom: 4px;
+    font-size: $size-5;
+}

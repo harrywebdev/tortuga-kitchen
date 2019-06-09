@@ -1,0 +1,60 @@
+<header class="card-header">
+  <p class="card-header-title">
+    Customer Name
+  </p>
+  <span class="card-header-icon">
+    {{slotTime}}
+  </span>
+  <a href="#" class="card-header-icon" aria-label="more options">
+    <div class="dropdown {{if hasOptionsMenuOpen "is-active"}}">
+      <div class="dropdown-trigger">
+        <button class="accept-button__auto-accept-triggger" aria-haspopup="true" aria-controls="dropdown-menu" {{action "toggleOptionsMenu"}}>
+          <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </button>
+      </div>
+      <div class="dropdown-menu" id="dropdown-menu" role="menu">
+        <div class="dropdown-content">
+          <a href="#" class="dropdown-item is-size-5">
+            <i class="fas fa-concierge-bell"></i>
+            Change Time
+          </a>
+          <a href="#" class="dropdown-item is-size-5">
+            <i class="fas fa-concierge-bell"></i>
+            Change Items
+          </a>
+          <a href="#" class="dropdown-item is-size-5">
+            <i class="fas fa-concierge-bell"></i>
+            Reject/Cancel
+          </a>
+          <a href="#" class="dropdown-item is-size-5">
+            <i class="fas fa-concierge-bell"></i>
+            Contact Customer
+          </a>
+        </div>
+      </div>
+    </div>
+  </a>
+</header>
+<div class="card-content order-card__content">
+  <ul class="order-card__items">
+    {{#if randomBurgers}}
+      <li class="order-card__item"><strong>🍔{{randomBurgers}}</strong> &times; Admiral Double Classic</li>
+    {{/if}}
+
+    {{#if randomSides}}
+      <li class="order-card__item"><strong>🍟{{randomSides}}</strong> &times; Grilovane Bramburky</li>
+    {{/if}}
+
+    {{#if randomDrinks}}
+      <li class="order-card__item"><strong>💧{{randomDrinks}}</strong> &times; Pilsner Urquell</li>
+    {{/if}}
+  </ul>
+</div>
+<footer class="card-footer">
+  <button class="order-card__done-button button is-fullwidth">
+    <i class="far fa-circle-check"></i>
+    Done
+  </button>
+</footer>
