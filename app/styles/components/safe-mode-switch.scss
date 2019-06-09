@@ -1,0 +1,28 @@
+.safe-mode-switch {
+    text-align: center;
+    position: relative;
+    top: 8px;
+}
+
+.safe-mode-switch__title {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: $size-7;
+    margin-bottom: 8px;
+}
+
+.safe-mode-switch__button {
+    width: 3.75rem;
+    margin: 0 auto $gap;
+}
+
+.safe-mode-switch__label {
+    display: block;
+    font-weight: $weight-bold;
+    font-size: $size-5;
+    color: $danger;
+
+    &.safe-mode-switch__label--on {
+        color: $success;
+    }
+}

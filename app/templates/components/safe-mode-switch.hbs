@@ -1,0 +1,12 @@
+<div class="safe-mode-switch__button">
+  <Input id="safeModeSwitch" type="checkbox" name="safeModeSwitch" class="switch is-medium is-success is-rounded" checked={{isChecked}} @click={{action "toggleSafeMode"}} />
+  <label for="safeModeSwitch"></label>
+</div>
+
+<div class="safe-mode-switch__title">
+  Safe mode
+
+  <span class="safe-mode-switch__label {{if isChecked "safe-mode-switch__label--on"}}">
+    {{if isChecked "ON" "OFF"}}
+  </span>
+</div>

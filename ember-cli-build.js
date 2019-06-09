@@ -5,7 +5,7 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 module.exports = function(defaults) {
     let app = new EmberApp(defaults, {
         sassOptions: {
-            includePaths: ['node_modules/bulma'],
+            includePaths: ['node_modules/bulma', 'node_modules/bulma-switch'],
         },
     });
 

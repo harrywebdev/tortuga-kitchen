@@ -2,9 +2,13 @@
 
 $gap: 8px; // from default 32px
 @import 'bulma.sass';
+
+$switch-background: $danger;
 @import 'src/sass/index.sass'; // bulma switch
 
 @import 'layouts/master';
 
 @import 'components/layouts/application-layout';
 @import 'components/accept-button';
+@import 'components/order-thumb-card';
+@import 'components/safe-mode-switch';

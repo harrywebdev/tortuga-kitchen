@@ -16,6 +16,7 @@
     "lint:js": "eslint .",
     "prestart": "ember test",
     "start": "ember serve --ssl=true --ssl-key=dev_ssl_certs/device.key --ssl-cert=dev_ssl_certs/tortuga.kitchen.test.crt --live-reload=true",
+    "dev": "ember serve --ssl=true --ssl-key=dev_ssl_certs/device.key --ssl-cert=dev_ssl_certs/tortuga.kitchen.test.crt --live-reload=true",
     "test": "ember test",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
@@ -60,6 +61,7 @@
     "node": "6.* || 8.* || >= 10.*"
   },
   "dependencies": {
-    "bulma": "^0.7.5"
+    "bulma": "^0.7.5",
+    "bulma-switch": "^2.0.0"
   }
 }
