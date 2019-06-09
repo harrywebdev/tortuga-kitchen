@@ -1,0 +1,15 @@
+.accept-button {
+    //
+}
+
+.accept-button__auto-accept {
+    //
+}
+
+.accept-button__auto-accept-triggger {
+    @extend .button;
+    @extend .is-white;
+    @extend .is-small;
+
+    margin-top: 8px;
+}
