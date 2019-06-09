@@ -1,5 +1,8 @@
 @charset "utf-8";
+
+$gap: 8px; // from default 32px
 @import 'bulma.sass';
+@import 'src/sass/index.sass'; // bulma switch
 
 @import 'layouts/master';
 
