@@ -1,15 +1,20 @@
+<div class="order-thumb-card__checkbox">
+  <Input class="is-checkradio is-rtl is-circle" id="selectOrderCheckbox-{{element.id}}" type="checkbox" checked={{isSelected}} @click={{action "toggleSelection"}} />
+  <label for="selectOrderCheckbox-{{element.id}}"></label>
+</div>
+
 <div class="order-thumb-card__content">
   <div class="order-thumb-card__items">
     {{#if randomBurgers}}
-    <span class="order-thumb-card__item">🍔{{randomBurgers}}</span>
+      <span class="order-thumb-card__item">🍔{{randomBurgers}}</span>
     {{/if}}
 
     {{#if randomSides}}
-    <span class="order-thumb-card__item">🍟{{randomSides}}</span>
+      <span class="order-thumb-card__item">🍟{{randomSides}}</span>
     {{/if}}
 
     {{#if randomDrinks}}
-    <span class="order-thumb-card__item">💧{{randomDrinks}}</span>
+      <span class="order-thumb-card__item">💧{{randomDrinks}}</span>
     {{/if}}
   </div>
 </div>
@@ -19,7 +24,7 @@
     {{slotTime}}
   </div>
 
-  <a class="card-footer-item order-thumb-card__customer order-thumb-card__customer--{{customerStatus}}">
+  <div class="card-footer-item order-thumb-card__customer order-thumb-card__customer--{{customerStatus}}">
     <i class="fas fa-user-circle"></i>
-  </a>
+  </div>
 </footer>

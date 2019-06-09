@@ -2564,6 +2564,11 @@ builtins@^1.0.3:
   resolved "https://registry.yarnpkg.com/builtins/-/builtins-1.0.3.tgz#cb94faeb61c8696451db36534e1422f94f0aee88"
   integrity sha1-y5T662HIaWRR2zZTThQi+U8K7og=
 
+bulma-checkradio@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/bulma-checkradio/-/bulma-checkradio-1.1.0.tgz#197a1f16c8a5dc54a7bd32371e6305c01aeac1df"
+  integrity sha512-IB/Gi0HGqSp3GsnuMrKdw0Dg6xdBqHrvt0AMBbpi7F014o25EUL9WWjhwBWEW2aJ4m2syuLU3wGMDNAreIZYCw==
+
 bulma-switch@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/bulma-switch/-/bulma-switch-2.0.0.tgz#7a187cd1bb8073e9a542478d936b89315f1ffcd8"

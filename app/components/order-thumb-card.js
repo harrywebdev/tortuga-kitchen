@@ -1,8 +1,11 @@
 import Component from '@ember/component';
+import { action } from '@ember/object';
 
 export default class OrderThumbCardComponent extends Component {
     classNames = ['order-thumb-card', 'card'];
+    classNameBindings = ['isSelected:order-thumb-card---selected'];
 
+    isSelected = false;
     slotTime = '';
 
     get customerStatus() {
@@ -20,5 +23,14 @@ export default class OrderThumbCardComponent extends Component {
 
     get randomDrinks() {
         return Math.floor(Math.random() * Math.floor(4));
+    }
+
+    click() {
+        this.toggleProperty('isSelected');
+    }
+
+    @action
+    toggleSelection() {
+        this.toggleProperty('isSelected');
     }
 }

@@ -63,6 +63,7 @@
   },
   "dependencies": {
     "bulma": "^0.7.5",
+    "bulma-checkradio": "^1.1.0",
     "bulma-switch": "^2.0.0"
   }
 }

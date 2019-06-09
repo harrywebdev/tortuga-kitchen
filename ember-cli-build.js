@@ -9,7 +9,7 @@ module.exports = function(defaults) {
             cascade: false,
         },
         sassOptions: {
-            includePaths: ['node_modules/bulma', 'node_modules/bulma-switch'],
+            includePaths: ['node_modules/bulma', 'node_modules/bulma-switch', 'node_modules/bulma-checkradio'],
         },
     });
 

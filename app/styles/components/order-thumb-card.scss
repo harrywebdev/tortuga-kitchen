@@ -3,25 +3,22 @@
     height: 100px;
     min-width: 100px;
     margin: 0 $gap / 2;
-    overflow: hidden;
+
+    &.order-thumb-card---selected {
+        background: rgba($success, 0.1);
+    }
 }
 
 .order-thumb-card__slot-time {
-    // position: absolute;
-    // top: 1px;
-    // right: 4px;
     font-weight: $weight-bold;
     font-size: $size-7;
     padding: 5px;
 }
 
 .order-thumb-card__customer {
-    // position: absolute;
-    // bottom: 1px;
-    // right: 4px;
     font-size: $size-5;
     padding: 5px;
-    
+
     &.order-thumb-card__customer--new {
         color: $cyan;
     }
@@ -52,4 +49,15 @@
     font-weight: $weight-bold;
     white-space: nowrap;
     margin: 0 1px;
+}
+
+.order-thumb-card__checkbox {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    z-index: 1;
+
+    label:before {
+        background: #fff;
+    }
 }
