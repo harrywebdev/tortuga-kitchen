@@ -1,27 +1,27 @@
+<div class="application-layout__safe-mode {{if isSafeModeSwitchCollapsed "application-layout__safe-mode--collapsed"}}">
+  {{#if isSafeModeSwitchCollapsed}}
+  <div class="application-layout__safe-mode-overlay" {{action "slideSafeModeIn" on="click"}}></div>
+  {{/if}}
+  <SafeModeSwitch />
+</div>
+
 <div class="application-layout__full-screen-rows">
   <div class="columns is-vcentered">
     <div class="column is-2">
       <AcceptButton />
     </div>
-    <div class="column is-10">
-      <div class="columns is-vcentered">
-        <div class="column is-paddingless is-10 application-layout__items">
-          <div class="application-layout__items-list">
-            <OrderThumbCard @slotTime="18:15" />
-            <OrderThumbCard @slotTime="18:15" />
-            <OrderThumbCard @slotTime="18:15" />
-            <OrderThumbCard @slotTime="18:15" />
-            <OrderThumbCard @slotTime="18:30" />
-            <OrderThumbCard @slotTime="18:30" />
-            <OrderThumbCard @slotTime="18:30" />
-            <OrderThumbCard @slotTime="18:45" />
-            <OrderThumbCard @slotTime="18:45" />
-            <OrderThumbCard @slotTime="18:45" />
-          </div>
-        </div>
-        <div class="column">
-          <SafeModeSwitch />
-        </div>
+    <div class="column is-paddingless is-10 application-layout__items">
+      <div class="application-layout__items-list">
+        <OrderThumbCard @slotTime="18:15" />
+        <OrderThumbCard @slotTime="18:15" />
+        <OrderThumbCard @slotTime="18:15" />
+        <OrderThumbCard @slotTime="18:15" />
+        <OrderThumbCard @slotTime="18:30" />
+        <OrderThumbCard @slotTime="18:30" />
+        <OrderThumbCard @slotTime="18:30" />
+        <OrderThumbCard @slotTime="18:45" />
+        <OrderThumbCard @slotTime="18:45" />
+        <OrderThumbCard @slotTime="18:45" />
       </div>
     </div>
   </div>
