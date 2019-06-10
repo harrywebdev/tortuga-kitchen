@@ -1,11 +1,12 @@
 .application-layout {
+    background: #fafafa;
     width: 100%;
     height: 100%;
     position: relative;
     overflow: hidden;
 
-    @include from($desktop) {
-        max-width: $desktop;
+    @include from(1024px) {
+        max-width: 1024px;
         margin: 0 auto;
     }
 }
@@ -16,15 +17,19 @@
     flex-direction: column;
     align-items: stretch;
     justify-content: stretch;
+}
 
-    & > .columns {
-        @extend .is-marginless;
-        flex-grow: 1;
+.application-layout__full-screen-row {
+    overflow: hidden;
+    flex: 1;
+    display: flex;
 
-        &:nth-child(2) {
-            flex-basis: 50%;
-            flex-grow: 2;
-        }
+    &.application-layout__full-screen-row--review {
+        flex: 0 0 130px;
+    }
+
+    &.application-layout__full-screen-row--containers {
+        flex: 0 0 130px;
     }
 }
 
@@ -70,8 +75,4 @@
     .application-layout__safe-mode--collapsed & {
         display: block;
     }
-}
-
-.application-layout__grill {
-    background-color: rgba(#34495e, 0.1);
 }

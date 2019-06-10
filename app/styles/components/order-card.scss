@@ -1,5 +1,9 @@
 .order-card {
-    //
+    &.order-card--on-the-grill {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .order-card__done-button {
@@ -18,6 +22,8 @@
 
 .order-card__content {
     padding: 0.75rem;
+    flex: 1;
+    overflow: auto;
 }
 
 .order-card__items {

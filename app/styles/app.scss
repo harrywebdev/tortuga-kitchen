@@ -10,8 +10,13 @@ $switch-background: $danger;
 @import 'layouts/master';
 
 @import 'components/layouts/application-layout';
+@import 'components/layouts/the-grill';
+@import 'components/layouts/pickup-area';
+
 @import 'components/accept-button';
+@import 'components/safe-mode-switch';
+
 @import 'components/order-card';
 @import 'components/order-name-card';
 @import 'components/order-thumb-card';
-@import 'components/safe-mode-switch';
+

@@ -1,6 +1,12 @@
 .order-name-card {
+    margin-bottom: $gap / 2;
+
     &.order-name-card--selected {
         background: rgba($success, 0.1);
+    }
+
+    &:last-child {
+        margin-bottom: 0;
     }
 }
 

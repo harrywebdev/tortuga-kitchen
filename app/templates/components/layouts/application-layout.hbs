@@ -6,50 +6,44 @@
 </div>
 
 <div class="application-layout__full-screen-rows">
-  <div class="columns is-vcentered">
-    <div class="column is-narrow">
-      <AcceptButton />
-    </div>
-    <div class="column is-paddingless application-layout__items">
-      <div class="application-layout__items-list">
-        <OrderThumbCard @pickupTime="18:15" />
-        <OrderThumbCard @pickupTime="18:15" />
-        <OrderThumbCard @pickupTime="18:15" />
-        <OrderThumbCard @pickupTime="18:15" />
-        <OrderThumbCard @pickupTime="18:30" />
-        <OrderThumbCard @pickupTime="18:30" />
-        <OrderThumbCard @pickupTime="18:30" />
-        <OrderThumbCard @pickupTime="18:45" />
-        <OrderThumbCard @pickupTime="18:45" />
-        <OrderThumbCard @pickupTime="18:45" />
+  <div class="application-layout__full-screen-row application-layout__full-screen-row--review">
+    <div class="columns is-vcentered is-marginless">
+      <div class="column is-narrow">
+        <AcceptButton />
+      </div>
+      <div class="column is-paddingless application-layout__items">
+        <div class="application-layout__items-list">
+          <OrderThumbCard @pickupTime="18:15" />
+          <OrderThumbCard @pickupTime="18:15" />
+          <OrderThumbCard @pickupTime="18:15" />
+          <OrderThumbCard @pickupTime="18:15" />
+          <OrderThumbCard @pickupTime="18:30" />
+          <OrderThumbCard @pickupTime="18:30" />
+          <OrderThumbCard @pickupTime="18:30" />
+          <OrderThumbCard @pickupTime="18:45" />
+          <OrderThumbCard @pickupTime="18:45" />
+          <OrderThumbCard @pickupTime="18:45" />
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="columns is-multiline application-layout__grill">
-    <div class="column is-4" >
-      <OrderCard @pickupTime="18:15" />
-    </div>
-    <div class="column is-4">
-      <OrderCard @pickupTime="18:15" />
-    </div>
-    <div class="column is-4">
-      <OrderCard @pickupTime="18:15" />
-    </div>
+  <div class="application-layout__full-screen-row">
+    <Layouts::TheGrill />
+    <Layouts::PickupArea />
   </div>
 
-  <div class="columns">
-    <div class="column" style="border: 3px solid #c0392b">
-      Ignored/Expired
-    </div>
-    <div class="column" style="background: #f39c12;">
-      The Chest
-    </div>
-    <div class="column">
-      <OrderNameCard @pickupTime="18:15" />
-      <OrderNameCard @pickupTime="18:15" />
-      <OrderNameCard @pickupTime="18:15" />
-      <OrderNameCard @pickupTime="18:15" />
+  <div class="application-layout__full-screen-row application-layout__full-screen-row--containers">
+    <div class="columns is-marginless">
+      <div class="column" style="border: 3px solid #c0392b">
+        Ignored/Expired
+      </div>
+      <div class="column" style="background: #f39c12;">
+        The Chest
+      </div>
+      <div class="column">
+
+      </div>
     </div>
   </div>
 </div>
