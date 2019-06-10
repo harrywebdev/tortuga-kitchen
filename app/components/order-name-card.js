@@ -1,14 +1,12 @@
 import Component from '@ember/component';
 import { action } from '@ember/object';
 
-export default class OrderThumbCardComponent extends Component {
-    classNames = ['order-thumb-card', 'card'];
-    classNameBindings = ['isSelected:order-thumb-card---selected', 'isOverload:order-thumb-card--overload'];
+export default class OrderNameCardComponent extends Component {
+    classNames = ['order-name-card', 'card'];
+    classNameBindings = ['isSelected:order-name-card---selected'];
 
     isSelected = false;
     pickupTime = '';
-
-    isOverload = false;
 
     get customerStatus() {
         // HACK: implement actual customer status
