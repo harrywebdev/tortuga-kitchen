@@ -22,14 +22,17 @@
 .application-layout__full-screen-row {
     overflow: hidden;
     flex: 1;
-    display: flex;
 
     &.application-layout__full-screen-row--review {
         flex: 0 0 130px;
     }
 
+    &.application-layout__full-screen-row--workspace {
+        display: flex;
+    }
+
     &.application-layout__full-screen-row--containers {
-        flex: 0 0 130px;
+        flex: 0 0 50px;
     }
 }
 
