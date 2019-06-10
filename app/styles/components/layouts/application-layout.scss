@@ -20,9 +20,9 @@
     & > .columns {
         @extend .is-marginless;
         flex-grow: 1;
-        
+
         &:nth-child(2) {
-            flex-basis: 40%;
+            flex-basis: 50%;
             flex-grow: 2;
         }
     }

@@ -9,6 +9,7 @@ html, body {
 body {
     background: #fafafa;
     overflow: hidden;
+    user-select: none;
 
     & > div {
         height: 100%;

@@ -2437,7 +2437,7 @@ broccoli-sri-hash@^2.1.0:
     sri-toolbox "^0.2.0"
     symlink-or-copy "^1.0.1"
 
-broccoli-stew@^2.1.0:
+broccoli-stew@^2.0.0, broccoli-stew@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/broccoli-stew/-/broccoli-stew-2.1.0.tgz#ba73add17fda3b9b01d8cfb343a8b613b7136a0a"
   integrity sha512-tgCkuTWYl4uf7k7ib2D79KFEj2hCgnTUNPMnrCoAha0/4bywcNccmaZVWtL9Ex37yX5h5eAbnM/ak2ULoMwSSw==
@@ -2564,10 +2564,10 @@ builtins@^1.0.3:
   resolved "https://registry.yarnpkg.com/builtins/-/builtins-1.0.3.tgz#cb94faeb61c8696451db36534e1422f94f0aee88"
   integrity sha1-y5T662HIaWRR2zZTThQi+U8K7og=
 
-bulma-checkradio@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/bulma-checkradio/-/bulma-checkradio-1.1.0.tgz#197a1f16c8a5dc54a7bd32371e6305c01aeac1df"
-  integrity sha512-IB/Gi0HGqSp3GsnuMrKdw0Dg6xdBqHrvt0AMBbpi7F014o25EUL9WWjhwBWEW2aJ4m2syuLU3wGMDNAreIZYCw==
+bulma-checkradio@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/bulma-checkradio/-/bulma-checkradio-1.0.2.tgz#db91046b467c44c9345a8bb3d91aa51f50da3f6e"
+  integrity sha1-25EEa0Z8RMk0Wouz2RqlH1DaP24=
 
 bulma-switch@^2.0.0:
   version "2.0.0"
@@ -3530,6 +3530,17 @@ ember-cli-eslint@^5.1.0:
     rsvp "^4.6.1"
     walk-sync "^1.0.0"
 
+ember-cli-fastclick@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-fastclick/-/ember-cli-fastclick-1.5.0.tgz#10562378f68cadb55266acc0a9a63317af389c7f"
+  integrity sha512-NgpFlHX9fia9hyuFTYu6SvchKHqAtFrtrKqqVMk/cx9iIWFeJ5D/cr9kR40R2OBTdea5B34JA27vnaD9b8BI0w==
+  dependencies:
+    broccoli-funnel "^2.0.1"
+    broccoli-merge-trees "^3.0.1"
+    broccoli-stew "^2.0.0"
+    ember-cli-babel "^6.6.0"
+    fastclick "^1.0.6"
+
 ember-cli-get-component-path-option@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ember-cli-get-component-path-option/-/ember-cli-get-component-path-option-1.0.0.tgz#0d7b595559e2f9050abed804f1d8eff1b08bc771"
@@ -3596,7 +3607,7 @@ ember-cli-preprocess-registry@^3.3.0:
     debug "^3.0.1"
     process-relative-require "^1.0.0"
 
-ember-cli-sass@^10.0.1:
+ember-cli-sass@^10.0.0:
   version "10.0.1"
   resolved "https://registry.yarnpkg.com/ember-cli-sass/-/ember-cli-sass-10.0.1.tgz#afa91eb7dfe3890be0390639d66976512e7d8edc"
   integrity sha512-dWVoX03O2Mot1dEB1AN3ofC8DDZb6iU4Kfkbr3WYi9S9bGVHrpR/ngsR7tuVBuTugTyG53FPtLLqYdqx7XjXdA==
@@ -4515,6 +4526,11 @@ fast-sourcemap-concat@^1.4.0:
     source-map "^0.4.2"
     source-map-url "^0.3.0"
     sourcemap-validator "^1.1.0"
+
+fastclick@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/fastclick/-/fastclick-1.0.6.tgz#161625b27b1a5806405936bda9a2c1926d06be6a"
+  integrity sha1-FhYlsnsaWAZAWTa9qaLBkm0Gvmo=
 
 faye-websocket@~0.10.0:
   version "0.10.0"

@@ -5,7 +5,7 @@ $gap: 8px; // from default 32px
 
 $switch-background: $danger;
 @import '../bulma-switch/src/sass/index.sass';
-@import '../bulma-checkradio/src/sass/index.sass';
+@import '../bulma-checkradio/dist/bulma-checkradio.sass';
 
 @import 'layouts/master';
 

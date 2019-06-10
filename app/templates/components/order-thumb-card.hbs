@@ -1,7 +1,9 @@
-<div class="order-thumb-card__checkbox">
-  <Input class="is-checkradio is-rtl is-circle" id="selectOrderCheckbox-{{element.id}}" type="checkbox" checked={{isSelected}} @click={{action "toggleSelection"}} />
-  <label for="selectOrderCheckbox-{{element.id}}"></label>
-</div>
+{{#if isSelected}}
+  <div class="order-thumb-card__checkbox">
+    <Input class="is-checkradio is-rtl is-circle" id="selectOrderCheckbox-{{element.id}}" type="checkbox" checked={{isSelected}} @click={{action "toggleSelection"}} />
+    <label for="selectOrderCheckbox-{{element.id}}"></label>
+  </div>
+{{/if}}
 
 <div class="order-thumb-card__content">
   <div class="order-thumb-card__items">

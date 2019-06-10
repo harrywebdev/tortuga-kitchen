@@ -3,6 +3,7 @@
     height: 100px;
     min-width: 100px;
     margin: 0 $gap / 2;
+    cursor: pointer;
 
     &.order-thumb-card---selected {
         background: rgba($success, 0.1);

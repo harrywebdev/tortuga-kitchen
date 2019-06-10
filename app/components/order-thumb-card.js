@@ -1,7 +1,7 @@
-import Component from '@ember/component';
+import HasTapEventsComponent from 'tortuga-kitchen/components/utils/has-tap-events';
 import { action } from '@ember/object';
 
-export default class OrderThumbCardComponent extends Component {
+export default class OrderThumbCardComponent extends HasTapEventsComponent {
     classNames = ['order-thumb-card', 'card'];
     classNameBindings = ['isSelected:order-thumb-card---selected', 'isOverload:order-thumb-card--overload'];
 
