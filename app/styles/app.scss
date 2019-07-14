@@ -7,6 +7,8 @@ $switch-background: $danger;
 @import '../bulma-switch/src/sass/index.sass';
 @import '../bulma-checkradio/dist/bulma-checkradio.sass';
 
+@import 'config/colors';
+
 @import 'layouts/master';
 
 @import 'components/safe-mode-switch';

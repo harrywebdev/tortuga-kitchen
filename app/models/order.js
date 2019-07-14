@@ -23,7 +23,7 @@ export default Model.extend({
 
     // local presentation things
     is_collapsed: attr('boolean', { defaultValue: false }),
-    is_in_queue_feed: attr('boolean', { defaultValue: true }),
+    is_in_grill_feed: attr('boolean', { defaultValue: true }),
 
     isCompleted: computed('status', function() {
         return this.get('status') === 'completed';

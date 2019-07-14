@@ -5,61 +5,61 @@
 .feed-filters__tab {
     &.feed-filters__tab--all {
         a {
-            @extend .has-text-primary;
+            color: $filter-color-all;
         }
 
         &.is-active a {
-            @extend .has-text-primary;
-            border-bottom-color: $primary;
-            background: rgba($primary, 0.15);
+            color: $filter-color-all;
+            border-bottom-color: $filter-color-all;
+            background: $filter-background-color-all;
         }
     }
 
-    &.feed-filters__tab--queue {
+    &.feed-filters__tab--grill {
         a {
-            @extend .has-text-grey-dark;
+            color: $filter-color-grill;
         }
 
         &.is-active a {
-            @extend .has-text-grey-dark;
-            border-bottom-color: $grey-dark;
-            background: rgba($grey-dark, 0.15);
+            color: $filter-color-grill;
+            border-bottom-color: $filter-color-grill;
+            background: $filter-background-color-grill;
         }
     }
 
     &.feed-filters__tab--pickup {
         a {
-            @extend .has-text-info;
+            color: $filter-color-pickup;
         }
 
         &.is-active a {
-            @extend .has-text-info;
-            border-bottom-color: $info;
-            background: rgba($info, 0.15);
+            color: $filter-color-pickup;
+            border-bottom-color: $filter-color-pickup;
+            background: $filter-background-color-pickup;
         }
     }
 
     &.feed-filters__tab--chest {
         a {
-            @extend .has-text-success;
+            color: $filter-color-chest;
         }
 
         &.is-active a {
-            @extend .has-text-success;
-            border-bottom-color: $success;
-            background: rgba($success, 0.15);
+            color: $filter-color-chest;
+            border-bottom-color: $filter-color-chest;
+            background: $filter-background-color-chest;
         }
     }
 
     &.feed-filters__tab--trash {
         a {
-            @extend .has-text-danger;
+            color: $filter-color-trash;
         }
 
         &.is-active a {
-            @extend .has-text-danger;
-            border-bottom-color: $danger;
-            background: rgba($danger, 0.15);
+            color: $filter-color-trash;
+            border-bottom-color: $filter-color-trash;
+            background: $filter-background-color-trash;
         }
     }
 }

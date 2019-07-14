@@ -3,7 +3,7 @@ import Service from '@ember/service';
 export default class FeedFiltersService extends Service {
     groups = {
         all: [],
-        queue: ['received', 'accepted'],
+        grill: ['received', 'accepted'],
         readyForPickup: ['made'],
         completed: ['completed'],
         trashed: ['rejected', 'cancelled'],
@@ -15,8 +15,8 @@ export default class FeedFiltersService extends Service {
         this.set('filters', this.groups.all);
     }
 
-    setToQueue() {
-        this.set('filters', this.groups.queue);
+    setToGrill() {
+        this.set('filters', this.groups.grill);
     }
 
     setToReadyForPickup() {

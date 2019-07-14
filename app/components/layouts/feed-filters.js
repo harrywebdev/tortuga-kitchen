@@ -13,8 +13,8 @@ export default class FeedFiltersComponent extends Component {
     }
 
     @computed('feedFilters.filters.[]')
-    get isQueueActive() {
-        return this.feedFilters.isGroupActive('queue');
+    get isGrillActive() {
+        return this.feedFilters.isGroupActive('grill');
     }
 
     @computed('feedFilters.filters.[]')
@@ -38,8 +38,8 @@ export default class FeedFiltersComponent extends Component {
     }
 
     @action
-    filterByQueue() {
-        this.feedFilters.setToQueue();
+    filterByGrill() {
+        this.feedFilters.setToGrill();
     }
 
     @action

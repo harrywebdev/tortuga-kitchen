@@ -1,0 +1,15 @@
+// feed filters color
+$filter-color-all: $grey-dark;
+$filter-background-color-all: rgba($grey-dark, 0.15);
+
+$filter-color-grill: hsl(30, 100%, 60%);
+$filter-background-color-grill: rgba($filter-color-grill, 0.15);
+
+$filter-color-pickup: $info;
+$filter-background-color-pickup: rgba($info, 0.15);
+
+$filter-color-chest: $success;
+$filter-background-color-chest: rgba($success, 0.15);
+
+$filter-color-trash: $danger;
+$filter-background-color-trash: rgba($danger, 0.15);
