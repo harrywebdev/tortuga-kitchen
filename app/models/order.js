@@ -1,5 +1,7 @@
 import DS from 'ember-data';
 import { computed } from '@ember/object';
+import { alias } from '@ember/object/computed';
+import moment from 'moment';
 const { Model, attr, hasMany, belongsTo } = DS;
 
 export default Model.extend({
@@ -16,6 +18,7 @@ export default Model.extend({
     delivery_amount: attr('number'),
     extra_amount: attr('number'),
     total_amount: attr('number'),
+    formatted_total_amount: attr('number'),
     currency: attr('string'),
 
     created_at: attr('date'),
@@ -45,16 +48,14 @@ export default Model.extend({
         return ['rejected', 'cancelled'].includes(this.get('status'));
     }),
 
-    formattedTotalAmount: computed('total_amount', function() {
-        return (this.get('total_amount') / 100).toLocaleString('cs-CZ', {
-            style: 'currency',
-            currency: 'CZK',
-            minimumFractionDigits: 0,
-        });
-    }),
+    formattedTotalAmount: alias('formatted_total_amount'),
 
     hasHighPriceWarning: computed('total_amount', function() {
         // TODO: configurable number, in cents
-        return this.get('total_amount') > (700 * 100);
+        return this.get('total_amount') > 700 * 100;
+    }),
+
+    orderTimeSlot: computed('order_time', function() {
+        return moment(this.get('order_time')).format('HH:mm');
     }),
 });

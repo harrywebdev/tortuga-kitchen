@@ -157,6 +157,8 @@ export default class OrderCardComponent extends Component {
 
     @action
     pushOrderDown() {
+        throw Error('This should be done on the server.');
+
         // eslint-disable-next-line
         const [all, hours, minutes] = this.order.get('order_time').match(/([0-9]{2}):([0-9]{2})/);
 
