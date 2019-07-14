@@ -3,7 +3,7 @@ import Service from '@ember/service';
 export default class FeedFiltersService extends Service {
     groups = {
         all: [],
-        grill: ['received', 'accepted'],
+        grill: ['processing'],
         readyForPickup: ['made'],
         completed: ['completed'],
         trashed: ['rejected', 'cancelled'],

@@ -3,6 +3,7 @@
     margin-bottom: $gap * 2;
     opacity: 1;
     transition: all 250ms ease-in-out;
+    box-shadow: 1px 1px 2px 0px rgba(10, 10, 10, 0.1);
 
     &.order-card--disappear {
         opacity: 0;
@@ -13,45 +14,79 @@
     }
 
     &.completed {
-        background: rgba($success, 0.1);
+        background: $filter-background-color-chest;
 
         .panel-heading {
-            border-color: $success;
-            background: rgba($success, 0.75);
+            border-color: $filter-color-chest;
+            background: $filter-color-chest;
             color: #fff;
         }
 
         .panel-block {
-            border-color: $success;
+            border-color: $filter-color-chest;
+        }
+
+        .order-card__item {
+            border-left: 1px solid $filter-color-chest;
+            border-right: 1px solid $filter-color-chest;
+        }
+    }
+
+    &.processing {
+        background: $filter-background-color-grill;
+
+        .panel-heading {
+            border-color: $filter-color-grill;
+            background: $filter-color-grill;
+            color: #fff;
+        }
+
+        .panel-block {
+            border-color: $filter-color-grill;
+        }
+
+        .order-card__item {
+            border-left: 1px solid $filter-color-grill;
+            border-right: 1px solid $filter-color-grill;
         }
     }
 
     &.made {
-        background: rgba($info, 0.1);
+        background: $filter-background-color-pickup;
 
         .panel-heading {
-            border-color: $info;
-            background: rgba($info, 0.75);
+            border-color: $filter-color-pickup;
+            background: $filter-color-pickup;
             color: #fff;
         }
 
         .panel-block {
-            border-color: $info;
+            border-color: $filter-color-pickup;
+        }
+
+        .order-card__item {
+            border-left: 1px solid $filter-color-pickup;
+            border-right: 1px solid $filter-color-pickup;
         }
     }
 
     &.rejected,
     &.cancelled {
-        background: rgba($danger, 0.1);
+        background: $filter-background-color-trash;
 
         .panel-heading {
-            border-color: $danger;
-            background: rgba($danger, 0.75);
+            border-color: $filter-color-trash;
+            background: $filter-color-trash;
             color: #fff;
         }
 
         .panel-block {
-            border-color: $danger;
+            border-color: $filter-color-trash;
+        }
+
+        .order-card__item {
+            border-left: 1px solid $filter-color-trash;
+            border-right: 1px solid $filter-color-trash;
         }
     }
 }
@@ -104,6 +139,8 @@
     padding: 0.5em 0.75em;
     color: $dark;
     border-bottom: 1px dotted $grey-light;
+    border-left: 1px solid $grey-lighter;
+    border-right: 1px solid $grey-lighter;
 
     .order-card.received & {
         font-size: $size-4;
@@ -126,4 +163,8 @@
     .order-card.received & {
         font-size: $size-5;
     }
+}
+
+.order-card__customer-name {
+    margin-left: 4px;
 }

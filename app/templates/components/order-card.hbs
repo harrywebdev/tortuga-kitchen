@@ -9,15 +9,17 @@
         <span class="tag order-card__heading-badge is-warning">Kč</span>
       {{/if}}
 
-      <span class="icon">
+      {{!-- <span class="icon">
         <i class="fas fa-user-circle"></i>
+      </span> --}}
+
+      <span class="order-card__customer-name">
+        {{order.customer_name}} (+420 731 456 789)
+
+        {{#unless hideTimeSlot}}
+          &mdash; {{order.order_time}}
+        {{/unless}}
       </span>
-
-      {{order.customer_name}} (+420 731 456 789)
-
-      {{#unless hideTimeSlot}}
-        &mdash; {{order.order_time}}
-      {{/unless}}
     </span>
 
     <span class="icon">
@@ -94,12 +96,12 @@
           <span class="icon">
             <i class={{if order.isNew "far fa-ban" "fas fa-exclamation-circle"}}></i>
           </span>
-          <span>{{if order.isNew "Blbost" "Zrušit"}}</span>
+          <span>Zrušit</span>
         </button>
       {{/if}}
 
       {{#if order.isNew}}
-        <button class="button is-warning" {{action "pushOrderDown"}}>
+        <button class="button is-dark is-outlined" {{action "pushOrderDown"}}>
           <span class="icon is-small">
             <i class="far fa-exclamation-circle"></i>
           </span>
@@ -109,6 +111,15 @@
 
 
       {{#if order.isNew}}
+        <button class="button is-warning" {{action "markOrderAsOnTheGrill"}}>
+          <span class="icon is-small">
+            <i class="far fa-hat-chef"></i>
+          </span>
+          <span>Hodit na grill</span>
+        </button>
+      {{/if}}
+
+      {{#if order.isOnTheGrill}}
         <button class="button is-info" {{action "markOrderAsReadyForPickup"}}>
           <span class="icon is-small">
             <i class="far fa-check-circle"></i>

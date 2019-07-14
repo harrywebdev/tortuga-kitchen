@@ -136,6 +136,11 @@ export default class OrderCardComponent extends Component {
     }
 
     @action
+    markOrderAsOnTheGrill() {
+        this.changeStatus('processing');
+    }
+
+    @action
     markOrderAsRejectedOrCancelled() {
         this.changeStatus(this.order.get('isNew') ? 'rejected' : 'cancelled');
     }

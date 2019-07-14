@@ -33,6 +33,10 @@ export default Model.extend({
         return this.get('status') === 'made';
     }),
 
+    isOnTheGrill: computed('status', function() {
+        return this.get('status') === 'processing';
+    }),
+
     isNew: computed('status', function() {
         return ['received', 'accepted'].includes(this.get('status'));
     }),
