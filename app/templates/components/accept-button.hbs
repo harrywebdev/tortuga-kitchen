@@ -1,0 +1,35 @@
+<button class="button is-large is-success" disabled={{isDisabled}}>
+  ACCEPT
+</button>
+
+<div class="accept-button__auto-accept">
+  <div class="dropdown {{if hasAutoAcceptMenuOpen "is-active"}}">
+    <div class="dropdown-trigger">
+      <button class="accept-button__auto-accept-triggger" aria-haspopup="true" aria-controls="dropdown-menu" {{action "toggleAutoAcceptMenu"}}>
+        <span>
+          <i class="far fa-shield-check"></i>
+          Auto-Accept
+        </span>
+        <span class="icon is-small">
+          <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+      </button>
+    </div>
+    <div class="dropdown-menu" id="dropdown-menu" role="menu">
+      <div class="dropdown-content">
+        <a class="dropdown-item is-size-5">
+          <i class="far fa-exclamation-triangle"></i>
+          All
+        </a>
+        <a href="#" class="dropdown-item is-active is-size-5">
+          <i class="far fa-shield-check"></i>
+          Trusted
+        </a>
+        <a href="#" class="dropdown-item is-size-5">
+          <i class="fas fa-concierge-bell"></i>
+          None
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

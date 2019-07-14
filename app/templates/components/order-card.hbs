@@ -1,0 +1,147 @@
+<nav class="panel">
+  <div class="panel-heading order-card__heading" role="button" {{action "toggleExpandCollapse"}} aria-role="button">
+    <span class="order-card__heading-customer">
+      {{#if order.is_takeaway}}
+        <span class="tag order-card__heading-badge is-dark">S</span>
+      {{/if}}
+
+      {{#if order.hasHighPriceWarning}}
+        <span class="tag order-card__heading-badge is-warning">Kč</span>
+      {{/if}}
+
+      <span class="icon">
+        <i class="fas fa-user-circle"></i>
+      </span>
+
+      {{order.customer_name}} (+420 731 456 789)
+
+      {{#unless hideTimeSlot}}
+        &mdash; {{order.order_time}}
+      {{/unless}}
+    </span>
+
+    <span class="icon">
+      <i class="far fa-angle-{{if order.is_collapsed "down" "up" }}" aria-hidden="true"></i>
+    </span>
+  </div>
+
+  <div class="order-card__body">
+    {{!-- <p class="panel-tabs">
+      <a class="is-active">items</a>
+      <a>customer</a>
+    </p> --}}
+    {{#if randomBurgers}}
+      <a class="order-card__item">
+        <span>
+          <span class="icon">
+            <i class="fas fa-cheeseburger" aria-hidden="true"></i>
+          </span>
+          {{randomBurgers}} &times; Admiral Double Classic
+        </span>
+        <span class="order-card__item-price">
+          300 Kč
+        </span>
+      </a>
+    {{/if}}
+
+    {{#if randomSides}}
+      <a class="order-card__item">
+        <span>
+          <span class="icon">
+            <i class="fas fa-french-fries" aria-hidden="true"></i>
+          </span>
+          {{randomSides}} &times; Grilovane Bramburky
+        </span>
+        <span class="order-card__item-price">
+          80 Kč
+        </span>
+      </a>
+    {{/if}}
+
+    {{#if randomDrinks}}
+      <a class="order-card__item">
+        <span>
+          <span class="icon">
+            <i class="fas fa-glass" aria-hidden="true"></i>
+          </span>
+          {{randomDrinks}} &times; Pilsner Urquell
+        </span>
+        <span class="order-card__item-price">
+          50 Kč
+        </span>
+      </a>
+    {{/if}}
+
+    <a class="order-card__item order-card__item--total">
+      <span>
+        Celkem ({{if order.is_takeaway 's sebou' 'tady'}})
+      </span>
+      <span>
+        {{order.formattedTotalAmount}}
+      </span>
+    </a>
+
+    <div class="panel-block order-card__actions">
+      {{#if order.isTrashed}}
+        <button class="button is-dark is-outlined" {{action "resetOrderToPreviousState"}}>
+          <span class="icon is-small">
+            <i class="far fa-undo"></i>
+          </span>
+          <span>Zpět</span>
+        </button>
+      {{else}}
+        <button class="button is-danger {{if order.isNew "is-outlined"}}"  {{action "markOrderAsRejectedOrCancelled"}}>
+          <span class="icon">
+            <i class={{if order.isNew "far fa-ban" "fas fa-exclamation-circle"}}></i>
+          </span>
+          <span>{{if order.isNew "Blbost" "Zrušit"}}</span>
+        </button>
+      {{/if}}
+
+      {{#if order.isNew}}
+        <button class="button is-warning" {{action "pushOrderDown"}}>
+          <span class="icon is-small">
+            <i class="far fa-exclamation-circle"></i>
+          </span>
+          <span>Spozdit o 30 minut</span>
+        </button>
+      {{/if}}
+
+
+      {{#if order.isNew}}
+        <button class="button is-info" {{action "markOrderAsReadyForPickup"}}>
+          <span class="icon is-small">
+            <i class="far fa-check-circle"></i>
+          </span>
+          <span>Připraveno na vyzvednutí</span>
+        </button>
+      {{/if}}
+
+      {{#if order.isReadyForPickup}}
+        <div>
+          <button class="button is-dark is-outlined" {{action "markOrderAsNew"}}>
+            <span class="icon is-small">
+              <i class="far fa-undo"></i>
+            </span>
+            <span>Zpět</span>
+          </button>
+          <button class="button is-success" {{action "markOrderAsCompleted"}}>
+            <span class="icon is-small">
+              <i class="far fa-treasure-chest"></i>
+            </span>
+            <span>Hotovo</span>
+          </button>
+        </div>
+      {{/if}}
+
+      {{#if order.isCompleted}}
+        <button class="button is-dark is-outlined" {{action "markOrderAsReadyForPickup"}}>
+          <span class="icon is-small">
+            <i class="far fa-undo"></i>
+          </span>
+          <span>Zpět</span>
+        </button>
+      {{/if}}
+    </div>
+  </div>
+</nav>

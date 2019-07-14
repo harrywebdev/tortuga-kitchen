@@ -1,0 +1,129 @@
+.order-card {
+    max-width: 100%;
+    margin-bottom: $gap * 2;
+    opacity: 1;
+    transition: all 250ms ease-in-out;
+
+    &.order-card--disappear {
+        opacity: 0;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &.completed {
+        background: rgba($success, 0.1);
+
+        .panel-heading {
+            border-color: $success;
+            background: rgba($success, 0.75);
+            color: #fff;
+        }
+
+        .panel-block {
+            border-color: $success;
+        }
+    }
+
+    &.made {
+        background: rgba($info, 0.1);
+
+        .panel-heading {
+            border-color: $info;
+            background: rgba($info, 0.75);
+            color: #fff;
+        }
+
+        .panel-block {
+            border-color: $info;
+        }
+    }
+
+    &.rejected,
+    &.cancelled {
+        background: rgba($danger, 0.1);
+
+        .panel-heading {
+            border-color: $danger;
+            background: rgba($danger, 0.75);
+            color: #fff;
+        }
+
+        .panel-block {
+            border-color: $danger;
+        }
+    }
+}
+
+.order-card__heading {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: $size-5;
+    font-weight: $weight-normal;
+    padding: 0.4em 0.75em;
+
+    .order-card.made & {
+        font-size: $size-4;
+    }
+}
+
+.order-card__heading-customer {
+    display: flex;
+    align-items: center;
+}
+
+.order-card__heading-badge {
+    font-weight: $weight-bold;
+    margin-right: 4px;
+}
+
+.order-card__body {
+    overflow: hidden;
+    opacity: 1;
+    max-height: 300px;
+    transition: all 250ms ease-in-out;
+
+    .order-card--is-collapsed & {
+        opacity: 0;
+        max-height: 0;
+    }
+}
+
+.order-card__actions {
+    justify-content: space-between;
+}
+
+.order-card__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: $size-5;
+    padding: 0.5em 0.75em;
+    color: $dark;
+    border-bottom: 1px dotted $grey-light;
+
+    .order-card.received & {
+        font-size: $size-4;
+    }
+
+    &.order-card__item--total {
+        font-weight: $weight-bold;
+
+        .order-card.made {
+            font-size: $size-4;
+        }
+
+        .order-card.received & {
+            font-size: $size-5;
+        }
+    }
+}
+
+.order-card__item-price {
+    .order-card.received & {
+        font-size: $size-5;
+    }
+}

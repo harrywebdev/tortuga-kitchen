@@ -1,0 +1,68 @@
+.order-thumb-card {
+    position: relative;
+    height: 100px;
+    min-width: 100px;
+    margin: 0 $gap / 2;
+    cursor: pointer;
+
+    &.order-thumb-card---selected {
+        background: rgba($success, 0.1);
+    }
+
+    &.order-thumb-card--overload {
+        background: rgba($red, 0.1);
+    }
+}
+
+.order-thumb-card__slot-time {
+    font-weight: $weight-bold;
+    font-size: $size-7;
+    padding: 5px;
+}
+
+.order-thumb-card__customer {
+    font-size: $size-5;
+    padding: 5px;
+
+    &.order-thumb-card__customer--new {
+        color: $cyan;
+    }
+
+    &.order-thumb-card__customer--trusted {
+        color: $green;
+    }
+
+    &.order-thumb-card__customer--strange {
+        $color: $orange;
+    }
+}
+
+.order-thumb-card__content {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px - 30px; // $total height - $footer height
+}
+
+.order-thumb-card__items {
+    text-align: center;
+}
+
+.order-thumb-card__item {
+    font-size: $size-6;
+    font-weight: $weight-bold;
+    white-space: nowrap;
+    margin: 0 1px;
+}
+
+.order-thumb-card__checkbox {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    z-index: 1;
+
+    label:before {
+        background: #fff;
+    }
+}

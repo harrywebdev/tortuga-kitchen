@@ -1,0 +1,41 @@
+<div class="feed-layout__filters">
+  <Layouts::FeedFilters />
+</div>
+
+<div class="feed-layout__controls">
+  <div class="columns is-marginless is-mobile">
+    <div class="column is-2 is-padingless">
+      <button class="button is-dark is-outlined" {{action "scrollToCurrentSlot"}}>
+        <span class="icon is-small">
+          <i class="far fa-stopwatch" aria-hidden="true"></i>
+        </span>
+        <span>Teď</span>
+      </button>
+    </div>
+
+    <div class="column is-10 is-padingless">
+      <SearchBox @searchTerm={{searchTerm}} @onChange={{action (mut searchTerm)}} />
+    </div>
+  </div>
+</div>
+
+<div class="feed-layout__items js-scrollable-feed">
+  {{#each ordersByTimeSlot as |slot|}}
+    <Layouts::FeedTimeSlot @slot={{slot.title}} @orders={{slot.orders}} />
+  {{/each}}
+
+  {{#if noOrdersToShow}}
+    <article class="message">
+      <div class="message-header">
+        <p>Žádné objednávky {{if searchTerm (concat "nenalezeny pro " searchTerm) "v tomhle stavu."}}.</p>
+      </div>
+      <div class="message-body">
+        {{#if searchTerm}}
+          Zkus hledat jinak.
+        {{else}}
+          Přepni filtr nahoře.
+        {{/if}}
+      </div>
+    </article>
+  {{/if}}
+</div>

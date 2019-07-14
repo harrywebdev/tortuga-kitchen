@@ -1,0 +1,14 @@
+{{#if orders.length}}
+  <div class="feed-time-slot__column-slot" role="button" {{action "toggleExpandCollapse"}} id={{slotId}} aria-role="button">
+    {{slot}}
+    <span class="icon">
+      <i class="far fa-angle-{{if isExpandedAll "up" "down" }}" aria-hidden="true"></i>
+    </span>
+  </div>
+
+  <div class="feed-time-slot__column-orders">
+    {{#each orders as |order|}}
+      <OrderCard @order={{order}} @hideTimeSlot={{true}} />
+    {{/each}}
+  </div>
+{{/if}}

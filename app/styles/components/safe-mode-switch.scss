@@ -1,0 +1,38 @@
+.safe-mode-switch {
+    text-align: center;
+    position: relative;
+    border-left: 3px solid $danger;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+
+    &.safe-mode-switch--on {
+        border-color: $success;
+    }
+}
+
+.safe-mode-switch__content {
+    padding: 0.75em;
+}
+
+.safe-mode-switch__title {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: $size-7;
+}
+
+.safe-mode-switch__button {
+    width: 3.75rem;
+    margin: 0 auto 16px;
+    outline: none;
+}
+
+.safe-mode-switch__label {
+    display: block;
+    font-weight: $weight-bold;
+    font-size: $size-5;
+    color: $danger;
+
+    .safe-mode-switch--on & {
+        color: $success;
+    }
+}

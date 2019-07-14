@@ -1,0 +1,34 @@
+<div class="tabs is-medium is-centered">
+  <ul>
+    <li class="feed-filters__tab feed-filters__tab--all {{if isAllActive "is-active"}}">
+      <a {{action "noFilter"}} role="button" aria-role="button" aria-label="all">
+        <span class="icon"><i class="far fa-ballot" aria-hidden="true"></i></span>
+        <span>Vše</span>
+      </a>
+    </li>
+    <li class="feed-filters__tab feed-filters__tab--queue {{if isQueueActive "is-active"}}">
+      <a {{action "filterByQueue"}} role="button" aria-role="button" aria-label="filter by queue">
+        <span class="icon"><i class="far fa-hat-chef" aria-hidden="true"></i></span>
+        <span>Gril</span>
+      </a>
+    </li>
+    <li class="feed-filters__tab feed-filters__tab--pickup {{if isPickupActive "is-active"}}">
+      <a {{action "filterByPickup"}} role="button" aria-role="button" aria-label="filter by pickup">
+        <span class="icon"><i class="far fa-check-circle" aria-hidden="true"></i></span>
+        <span>Vyzvednout</span>
+      </a>
+    </li>
+    <li class="feed-filters__tab feed-filters__tab--chest {{if isChestActive "is-active"}}">
+      <a {{action "filterByChest"}} role="button" aria-role="button" aria-label="filter by chest">
+        <span class="icon"><i class="far fa-treasure-chest" aria-hidden="true"></i></span>
+        <span>Hotovo</span>
+      </a>
+    </li>
+    <li class="feed-filters__tab feed-filters__tab--trash {{if isTrashActive "is-active"}}">
+      <a {{action "filterByTrash"}} role="button" aria-role="button" aria-label="filter by trash">
+        <span class="icon"><i class="far fa-trash-alt" aria-hidden="true"></i></span>
+        <span>Koš</span>
+      </a>
+    </li>
+  </ul>
+</div>

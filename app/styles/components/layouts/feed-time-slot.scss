@@ -1,0 +1,25 @@
+.feed-time-slot {
+    @extend .columns;
+    @extend .is-mobile;
+
+    border-bottom: 2px dotted lightgrey;
+
+    &.feed-time-slot--empty {
+        display: none;
+    }
+}
+
+.feed-time-slot__column-slot {
+    @extend .column;
+    @extend .is-2;
+    font-weight: $weight-bold;
+    padding-top: $gap * 3;
+    text-align: center;
+    cursor: pointer;
+}
+
+.feed-time-slot__column-orders {
+    @extend .column;
+    @extend .is-10;
+    padding-right: $gap * 2;
+}

@@ -1,3 +1,81 @@
-body {
+.application-layout {
     background: #fafafa;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+
+    @include from(1024px) {
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+}
+
+.application-layout__full-screen-rows {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+.application-layout__full-screen-row {
+    overflow: hidden;
+    flex: 1;
+
+    &.application-layout__full-screen-row--review {
+        flex: 0 0 130px;
+    }
+
+    &.application-layout__full-screen-row--workspace {
+        display: flex;
+    }
+
+    &.application-layout__full-screen-row--containers {
+        flex: 0 0 50px;
+    }
+}
+
+.application-layout__items {
+    overflow-x: auto;
+    height: 130px;
+    mask-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0)
+    );
+}
+
+.application-layout__items-list {
+    display: flex;
+    margin-top: 15px;
+}
+
+.application-layout__safe-mode {
+    position: absolute;
+    top: 8px;
+    right: 0;
+    transition: transform 250ms ease-in-out;
+    z-index: 1;
+
+    &.application-layout__safe-mode--collapsed {
+        transform: translateX(70%);
+    }
+}
+
+.application-layout__safe-mode-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+
+    .application-layout__safe-mode--collapsed & {
+        display: block;
+    }
 }

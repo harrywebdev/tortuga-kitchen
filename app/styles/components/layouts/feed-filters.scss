@@ -1,0 +1,65 @@
+.feed-filters {
+    //
+}
+
+.feed-filters__tab {
+    &.feed-filters__tab--all {
+        a {
+            @extend .has-text-primary;
+        }
+
+        &.is-active a {
+            @extend .has-text-primary;
+            border-bottom-color: $primary;
+            background: rgba($primary, 0.15);
+        }
+    }
+
+    &.feed-filters__tab--queue {
+        a {
+            @extend .has-text-grey-dark;
+        }
+
+        &.is-active a {
+            @extend .has-text-grey-dark;
+            border-bottom-color: $grey-dark;
+            background: rgba($grey-dark, 0.15);
+        }
+    }
+
+    &.feed-filters__tab--pickup {
+        a {
+            @extend .has-text-info;
+        }
+
+        &.is-active a {
+            @extend .has-text-info;
+            border-bottom-color: $info;
+            background: rgba($info, 0.15);
+        }
+    }
+
+    &.feed-filters__tab--chest {
+        a {
+            @extend .has-text-success;
+        }
+
+        &.is-active a {
+            @extend .has-text-success;
+            border-bottom-color: $success;
+            background: rgba($success, 0.15);
+        }
+    }
+
+    &.feed-filters__tab--trash {
+        a {
+            @extend .has-text-danger;
+        }
+
+        &.is-active a {
+            @extend .has-text-danger;
+            border-bottom-color: $danger;
+            background: rgba($danger, 0.15);
+        }
+    }
+}

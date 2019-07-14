@@ -1,1 +1,62 @@
-{{yield}}
+<div class="application-layout__safe-mode {{if isSafeModeSwitchCollapsed "application-layout__safe-mode--collapsed"}}">
+  {{#if isSafeModeSwitchCollapsed}}
+    <div class="application-layout__safe-mode-overlay" {{action "slideSafeModeIn" on="click"}} role="button"></div>
+  {{/if}}
+  <SafeModeSwitch />
+</div>
+
+<div class="application-layout__full-screen-rows">
+  <div class="application-layout__full-screen-row application-layout__full-screen-row--review">
+    <div class="columns is-vcentered is-marginless">
+      <div class="column is-narrow">
+        <AcceptButton />
+      </div>
+      <div class="column is-paddingless application-layout__items">
+        <div class="application-layout__items-list">
+          <OrderThumbCard @orderTime="18:15" />
+          <OrderThumbCard @orderTime="18:15" />
+          <OrderThumbCard @orderTime="18:15" />
+          <OrderThumbCard @orderTime="18:15" />
+          <OrderThumbCard @orderTime="18:30" />
+          <OrderThumbCard @orderTime="18:30" />
+          <OrderThumbCard @orderTime="18:30" />
+          <OrderThumbCard @orderTime="18:45" />
+          <OrderThumbCard @orderTime="18:45" />
+          <OrderThumbCard @orderTime="18:45" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="application-layout__full-screen-row application-layout__full-screen-row--workspace">
+    <Layouts::TheGrill />
+    <Layouts::PickupArea />
+  </div>
+
+  <div class="application-layout__full-screen-row application-layout__full-screen-row--containers">
+    {{! template-lint-disable no-inline-styles }}
+    <div class="columns is-marginless" style="flex: 1;">
+      <div class="column is-4 is-size-5" style="background: #c0392b; color: #fff;">
+        Missed:&nbsp;&nbsp;
+        <i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;
+        <i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;
+        <i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;
+        <i class="fas fa-exclamation-circle"></i>
+      </div>
+      <div class="column is-1 is-size-6" style="background: #7f8c8d; color: #fff;">
+        Bin: <i class="fas fa-trash-alt"></i>
+      </div>
+      <div class="column is-5 is-size-5" style="background: #f1c40f; color: #000; text-align: center;">
+        <i class="far fa-treasure-chest"></i>
+      </div>
+      <div class="column is-paddingless" style="text-align: center;">
+        <button class="button is-medium is-light">
+          <i class="far fa-sliders-v-square"></i>
+          &nbsp;&nbsp;Settings
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<CustomerDetailsModal />

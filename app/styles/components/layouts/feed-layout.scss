@@ -1,0 +1,35 @@
+.feed-layout {
+    background: #fafafa;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    @include from(1024px) {
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+}
+
+.feed-layout__filters {
+    flex: 0 0 46px;
+}
+
+.feed-layout__controls {
+    flex: 0 0 60px;
+    padding: 0 $gap;
+    background: #fff;
+    border-bottom: 1px dashed $grey-light;
+}
+
+.feed-layout__items {
+    background: #fff;
+    flex: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: $gap;
+    position: relative;
+}

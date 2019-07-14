@@ -1,1 +1,24 @@
+@charset "utf-8";
+
+$gap: 8px; // from default 32px
+@import '../bulma/bulma.sass';
+
+$switch-background: $danger;
+@import '../bulma-switch/src/sass/index.sass';
+@import '../bulma-checkradio/dist/bulma-checkradio.sass';
+
+@import 'layouts/master';
+
 @import 'components/layouts/application-layout';
+@import 'components/layouts/the-grill';
+@import 'components/layouts/pickup-area';
+@import 'components/accept-button';
+@import 'components/safe-mode-switch';
+@import 'components/order-name-card';
+@import 'components/order-thumb-card';
+
+
+@import 'components/layouts/feed-filters';
+@import 'components/layouts/feed-layout';
+@import 'components/layouts/feed-time-slot';
+@import 'components/order-card';

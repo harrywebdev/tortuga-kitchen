@@ -1,0 +1,15 @@
+<div class="modal {{if show "is-active"}}">
+  <div class="modal-background" role="button" {{action "closeModal" on="click"}} aria-role="button" ></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title"><i class="fas fa-user-circle"></i> Customer: Name</p>
+      <button class="delete" aria-label="close" {{action "closeModal" on="click"}}></button>
+    </header>
+    <section class="modal-card-body is-size-5">
+      <strong>Status:</strong> <span class="tag is-success">Trusted</span> (12 orders, 0 rejects, 0 cancels)<br>
+      <strong>Facebook:</strong> <a href="#">(preview)</a><br>
+      <strong>Mobile number:</strong> 711456908<br>
+      <strong>Registered on:</strong> 12th May 2019<br>
+    </section>
+  </div>
+</div>

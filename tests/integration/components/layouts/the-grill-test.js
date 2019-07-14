@@ -3,12 +3,12 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | layouts/application-layout', function(hooks) {
+module('Integration | Component | layouts/the-grill', function(hooks) {
     setupRenderingTest(hooks);
 
     skip('it renders', async function(assert) {
-        await render(hbs`{{layouts/application-layout}}`);
+        await render(hbs`<Layouts::TheGrill />`);
 
-        assert.equal(this.element.querySelectorAll('.application-layout').length, 1);
+        assert.equal(this.element.querySelectorAll('.the-grill').length, 1);
     });
 });
