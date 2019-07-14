@@ -9,6 +9,6 @@ module('Integration | Component | search-box', function(hooks) {
     test('it renders', async function(assert) {
         await render(hbs`<SearchBox />`);
 
-        assert.equal(this.element.querySelectorAll('.search-biox').length, 1);
+        assert.equal(this.element.querySelectorAll('.search-box').length, 1);
     });
 });
