@@ -10,7 +10,7 @@ export default class OrderCardComponent extends Component {
     @service flashMessages;
 
     classNames = ['order-card', 'card'];
-    classNameBindings = ['orderStatus', 'isCollapsed:order-card--is-collapsed', 'changingStatus:order-card--disappear'];
+    classNameBindings = ['order.status', 'isCollapsed:order-card--is-collapsed'];
     attributeBindings = ['isExpandedForAria:aria-expanded'];
 
     // model
@@ -36,92 +36,27 @@ export default class OrderCardComponent extends Component {
         return this.order.is_collapsed;
     }
 
-    // to temporarily override order status for visual purposes
-    orderVisualStatus = null;
-    changingStatus = false;
-
-    @computed('order.status', 'orderVisualStatus')
-    get orderStatus() {
-        if (this.orderVisualStatus) {
-            return this.orderVisualStatus;
-        }
-
-        return this.order.get('status');
-    }
-
-    // local state of manipulation of Order
-    // changing state will most likely be API driven and
-    // this will be scrapped or used just temporarily
-    previousOrderState = 'received';
-
     hideTimeSlot = false;
-    cardActionTimer = null;
 
     hasOptionsMenuOpen = false;
 
     /**
-     * If changing status means filtering order out, then animate:
-     * Change visual status, then collapse and disappear, then set
-     * real order status to possibly rearrange the card into another
-     * swim lane.
-     *
-     * Otherwise, change status instantly and collapse a card.
+     * Change status instantly.
      * @param {string} status
      */
     changeStatus(status) {
-        cancel(this.cardActionTimer);
-        this.cardActionTimer = null;
         this.set('previousOrderState', this.order.get('status'));
 
-        if (this.feedFilters.isStatusActive(status)) {
-            this.order.set('status', status);
-            this.order.save().catch(reason => {
-                const error =
-                    reason.errors && reason.errors.length
-                        ? `${reason.errors[0].title} - ${reason.errors[0].detail}`
-                        : JSON.stringify(reason);
+        this.order.set('status', status);
+        this.order.save().catch(reason => {
+            const error =
+                reason.errors && reason.errors.length
+                    ? `${reason.errors[0].title} - ${reason.errors[0].detail}`
+                    : JSON.stringify(reason);
 
-                console.error('Could not update Order status', error);
-                this.flashMessages.danger(`Could not update Order status: ${error}`);
-                this.order.set('status', this.get('previousOrderState'));
-            });
-            return;
-        }
-
-        this.set('orderVisualStatus', status);
-
-        later(() => {
-            this.set('changingStatus', true);
-
-            later(() => {
-                this.order.set('status', status);
-                this.set('changingStatus', false);
-                this.set('orderVisualStatus', null);
-
-                this.order.save().catch(reason => {
-                    const error =
-                        reason.errors && reason.errors.length
-                            ? `${reason.errors[0].title} - ${reason.errors[0].detail}`
-                            : JSON.stringify(reason);
-
-                    console.error('Could not update Order status', error);
-                    this.flashMessages.danger(`Could not update Order status: ${error}`);
-                    this.order.set('status', this.get('previousOrderState'));
-                });
-            }, 250);
-        }, 500);
-    }
-
-    collapseCard(now = false) {
-        if (now) {
-            return this.order.set('is_collapsed', true);
-        }
-
-        return new EmberPromise(resolve => {
-            this.cardActionTimer = later(() => {
-                this.order.set('is_collapsed', true);
-                resolve();
-            }, 250);
+            console.error('Could not update Order status', error);
+            this.flashMessages.danger(`Could not update Order status: ${error}`);
+            this.order.set('status', this.get('previousOrderState'));
         });
     }
 
