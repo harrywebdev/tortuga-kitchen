@@ -18,4 +18,19 @@ export default class IndexController extends Controller {
 
         return orders.map(order => order.get('orderTimeSlot')).uniq();
     }
+
+    @computed('model.@each.{status}')
+    get ordersCountsByStatus() {
+        const orders = this.get('model');
+
+        return orders.reduce((acc, order) => {
+            if (!acc[order.status]) {
+                acc[order.status] = 0;
+            }
+
+            acc[order.status]++;
+
+            return acc;
+        }, {});
+    }
 }

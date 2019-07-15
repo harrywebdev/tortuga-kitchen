@@ -11,12 +11,18 @@
         <span class="icon"><i class="far fa-hat-chef" aria-hidden="true"></i></span>
         <span>Gril</span>
       </a>
+      {{#if ordersCounts.processing}}
+        <span class="feed-filters__tab-dot"></span>
+      {{/if}}
     </li>
     <li class="feed-filters__tab feed-filters__tab--pickup {{if isPickupActive "is-active"}}">
       <a {{action "filterByPickup"}} role="button" aria-role="button" aria-label="filter by pickup">
         <span class="icon"><i class="far fa-check-circle" aria-hidden="true"></i></span>
         <span>Vyzvednout</span>
       </a>
+      {{#if ordersCounts.made}}
+        <span class="feed-filters__tab-dot"></span>
+      {{/if}}
     </li>
     <li class="feed-filters__tab feed-filters__tab--chest {{if isChestActive "is-active"}}">
       <a {{action "filterByChest"}} role="button" aria-role="button" aria-label="filter by chest">
