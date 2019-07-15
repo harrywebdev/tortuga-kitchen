@@ -7,6 +7,7 @@ import { Promise as EmberPromise } from 'rsvp';
 export default class OrderCardComponent extends Component {
     @service customerInspector;
     @service feedFilters;
+    @service flashMessages;
 
     classNames = ['order-card', 'card'];
     classNameBindings = ['orderStatus', 'isCollapsed:order-card--is-collapsed', 'changingStatus:order-card--disappear'];
@@ -58,18 +59,6 @@ export default class OrderCardComponent extends Component {
 
     hasOptionsMenuOpen = false;
 
-    get randomBurgers() {
-        return Math.floor(Math.random() * Math.floor(4));
-    }
-
-    get randomSides() {
-        return Math.floor(Math.random() * Math.floor(4));
-    }
-
-    get randomDrinks() {
-        return Math.floor(Math.random() * Math.floor(4));
-    }
-
     /**
      * If changing status means filtering order out, then animate:
      * Change visual status, then collapse and disappear, then set
@@ -87,7 +76,13 @@ export default class OrderCardComponent extends Component {
         if (this.feedFilters.isStatusActive(status)) {
             this.order.set('status', status);
             this.order.save().catch(reason => {
-                console.error('Could not update Order status', reason);
+                const error =
+                    reason.errors && reason.errors.length
+                        ? `${reason.errors[0].title} - ${reason.errors[0].detail}`
+                        : JSON.stringify(reason);
+
+                console.error('Could not update Order status', error);
+                this.flashMessages.danger(`Could not update Order status: ${error}`);
                 this.order.set('status', this.get('previousOrderState'));
             });
             return;
@@ -100,16 +95,19 @@ export default class OrderCardComponent extends Component {
 
             later(() => {
                 this.order.set('status', status);
-                this.order
-                    .save()
-                    .then(() => {
-                        this.set('changingStatus', false);
-                        this.set('orderVisualStatus', null);
-                    })
-                    .catch(reason => {
-                        console.error('Could not update Order status', reason);
-                        this.order.set('status', this.get('previousOrderState'));
-                    });
+                this.set('changingStatus', false);
+                this.set('orderVisualStatus', null);
+
+                this.order.save().catch(reason => {
+                    const error =
+                        reason.errors && reason.errors.length
+                            ? `${reason.errors[0].title} - ${reason.errors[0].detail}`
+                            : JSON.stringify(reason);
+
+                    console.error('Could not update Order status', error);
+                    this.flashMessages.danger(`Could not update Order status: ${error}`);
+                    this.order.set('status', this.get('previousOrderState'));
+                });
             }, 250);
         }, 500);
     }

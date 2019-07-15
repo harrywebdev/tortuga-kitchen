@@ -1,8 +1,11 @@
 import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 import { action, computed } from '@ember/object';
 import { not } from '@ember/object/computed';
 
 export default class FeedLayoutComponent extends Component {
+    @service flashMessages;
+
     classNames = ['feed-layout'];
 
     // model

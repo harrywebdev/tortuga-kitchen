@@ -25,6 +25,11 @@ module.exports = function(environment) {
         api: {
             host: '<insert production host here>',
         },
+
+        flashMessageDefaults: {
+            destroyOnClick: true,
+            timeout: 5000,
+        },
     };
 
     if (environment === 'development') {
