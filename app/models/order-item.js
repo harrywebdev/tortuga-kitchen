@@ -9,6 +9,7 @@ export default Model.extend({
     price: attr('number'),
     quantity: attr('number'),
     total_price: attr('number'),
+    formatted_total_price: attr('string'),
     currency: attr('string'),
 
     created_at: attr('date'),

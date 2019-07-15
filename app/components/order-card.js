@@ -86,6 +86,10 @@ export default class OrderCardComponent extends Component {
 
         if (this.feedFilters.isStatusActive(status)) {
             this.order.set('status', status);
+            this.order.save().catch(reason => {
+                console.error('Could not update Order status', reason);
+                this.order.set('status', this.get('previousOrderState'));
+            });
             return;
         }
 
@@ -96,8 +100,16 @@ export default class OrderCardComponent extends Component {
 
             later(() => {
                 this.order.set('status', status);
-                this.set('changingStatus', false);
-                this.set('orderVisualStatus', null);
+                this.order
+                    .save()
+                    .then(() => {
+                        this.set('changingStatus', false);
+                        this.set('orderVisualStatus', null);
+                    })
+                    .catch(reason => {
+                        console.error('Could not update Order status', reason);
+                        this.order.set('status', this.get('previousOrderState'));
+                    });
             }, 250);
         }, 500);
     }

@@ -5,7 +5,7 @@ import moment from 'moment';
 const { Model, attr, hasMany, belongsTo } = DS;
 
 export default Model.extend({
-    items: hasMany('order-item'),
+    orderItems: hasMany('order-item'),
     customer: belongsTo('customer'),
 
     delivery_type: attr('string'),
@@ -18,7 +18,7 @@ export default Model.extend({
     delivery_amount: attr('number'),
     extra_amount: attr('number'),
     total_amount: attr('number'),
-    formatted_total_amount: attr('number'),
+    formatted_total_amount: attr('string'),
     currency: attr('string'),
 
     created_at: attr('date'),

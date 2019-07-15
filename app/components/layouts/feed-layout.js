@@ -18,7 +18,7 @@ export default class FeedLayoutComponent extends Component {
         if (this.searchTerm !== '') {
             const escapedSearchTerm = this.searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
             var re = new RegExp(escapedSearchTerm, 'ig');
-            return this.orders.filter(order => re.test(order.customer_name));
+            return this.orders.filter(order => re.test(order.customer.name));
         }
 
         return this.orders;

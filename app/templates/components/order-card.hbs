@@ -14,7 +14,7 @@
       </span> --}}
 
       <span class="order-card__customer-name">
-        {{order.customer_name}} (+420 731 456 789)
+        {{order.customer.name}} ({{order.customer.mobile_number}})
 
         {{#unless hideTimeSlot}}
           &mdash; {{order.orderTimeSlot}}
@@ -32,47 +32,21 @@
       <a class="is-active">items</a>
       <a>customer</a>
     </p> --}}
-    {{#if randomBurgers}}
+    {{#each order.orderItems as |item|}}
       <a class="order-card__item">
         <span>
-          <span class="icon">
-            <i class="fas fa-cheeseburger" aria-hidden="true"></i>
-          </span>
-          {{randomBurgers}} &times; Admiral Double Classic
+          {{!-- emoji is "nice-to-have" (in DB part of Category)
+            <span class="icon">
+              <i class="fas fa-cheeseburger" aria-hidden="true"></i>
+            </span>
+          --}}
+          {{item.quantity}} &times; {{item.title}}
         </span>
         <span class="order-card__item-price">
-          300 Kč
+          {{item.formatted_total_price}}
         </span>
       </a>
-    {{/if}}
-
-    {{#if randomSides}}
-      <a class="order-card__item">
-        <span>
-          <span class="icon">
-            <i class="fas fa-french-fries" aria-hidden="true"></i>
-          </span>
-          {{randomSides}} &times; Grilovane Bramburky
-        </span>
-        <span class="order-card__item-price">
-          80 Kč
-        </span>
-      </a>
-    {{/if}}
-
-    {{#if randomDrinks}}
-      <a class="order-card__item">
-        <span>
-          <span class="icon">
-            <i class="fas fa-glass" aria-hidden="true"></i>
-          </span>
-          {{randomDrinks}} &times; Pilsner Urquell
-        </span>
-        <span class="order-card__item-price">
-          50 Kč
-        </span>
-      </a>
-    {{/if}}
+    {{/each}}
 
     <a class="order-card__item order-card__item--total">
       <span>
