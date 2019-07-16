@@ -9,6 +9,7 @@ $switch-background: $danger;
 
 @import 'config/colors';
 
+@import 'layouts/error-page';
 @import 'layouts/master';
 
 @import 'components/safe-mode-switch';

@@ -1,9 +1,7 @@
 import Component from '@ember/component';
 import { action, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { later, cancel } from '@ember/runloop';
-import { Promise as EmberPromise } from 'rsvp';
-
+    
 export default class OrderCardComponent extends Component {
     @service customerInspector;
     @service feedFilters;
