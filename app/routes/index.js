@@ -2,6 +2,7 @@ import Route from '@ember/routing/route';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { task, timeout } from 'ember-concurrency';
+import config from 'tortuga-kitchen/config/environment';
 
 export default class IndexRoute extends Route.extend({
     /**
@@ -14,7 +15,7 @@ export default class IndexRoute extends Route.extend({
         // TODO: only do this when websocket does not work
 
         while (true) {
-            yield timeout(2000);
+            yield timeout(config.polling.timeout);
 
             try {
                 const orders = yield this.get('store').findAll('order', { include: 'order-items', reload: true });
@@ -29,7 +30,7 @@ export default class IndexRoute extends Route.extend({
                 }
             } catch (e) {
                 attempts++;
-                if (attempts > 4) {
+                if (attempts > config.polling.retries) {
                     this.flashMessages.danger('Ajaj, asi spadnul server. Zkus obnovit stranku.', {
                         sticky: true,
                     });

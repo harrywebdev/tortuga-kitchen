@@ -30,6 +30,11 @@ module.exports = function(environment) {
             destroyOnClick: true,
             timeout: 5000,
         },
+
+        polling: {
+            timeout: 20000,
+            retries: 5,
+        },
     };
 
     if (environment === 'development') {
