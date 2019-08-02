@@ -5,8 +5,9 @@ import { task, timeout } from 'ember-concurrency';
 import config from 'tortuga-kitchen/config/environment';
 
 export default class IndexRoute extends Route {
-    @service store;
     @service flashMessages;
+    @service kitchenState;
+    @service store;
 
     /**
      * Fallback polling in case the socket is down
@@ -34,7 +35,7 @@ export default class IndexRoute extends Route {
             } catch (e) {
                 attempts++;
                 if (attempts > config.polling.retries) {
-                    this.flashMessages.danger('Ajaj, asi spadnul server. Zkus obnovit stranku.', {
+                    this.flashMessages.danger('Ajaj, asi spadnul server. Zkus obnovit stránku.', {
                         sticky: true,
                     });
                     return false;
@@ -52,7 +53,18 @@ export default class IndexRoute extends Route {
 
     afterModel() {
         this._super(...arguments);
-        this.get('pollForOrders').perform();
+        this.pollForOrders.perform();
+
+        this.store.find('setting', '1').then(
+            settings => {
+                this.kitchenState.initShop(settings);
+            },
+            () => {
+                this.flashMessages.danger('Ajaj, asi spadnul server. Zkus obnovit stránku.', {
+                    sticky: true,
+                });
+            }
+        );
     }
 
     @action

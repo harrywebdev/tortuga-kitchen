@@ -2,9 +2,11 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { action, computed } from '@ember/object';
 import { not } from '@ember/object/computed';
+import { task } from 'ember-concurrency';
 
 export default class FeedLayoutComponent extends Component {
     @service flashMessages;
+    @service kitchenState;
     @service orderManager;
 
     classNames = ['feed-layout'];
@@ -42,6 +44,15 @@ export default class FeedLayoutComponent extends Component {
             };
         });
     }
+
+    @(task(function*(open) {
+        if (open) {
+            yield this.kitchenState.openShop.perform();
+        } else {
+            yield this.kitchenState.closeShop.perform();
+        }
+    }).drop())
+    openCloseShop;
 
     @action
     scrollToTop() {

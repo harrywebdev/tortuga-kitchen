@@ -18,7 +18,7 @@
 
 <div class="feed-layout__controls">
   <div class="columns is-marginless is-mobile">
-    <div class="column is-2 is-padingless">
+    <div class="column is-2 is-padingless has-text-centered">
       <button class="button is-dark is-outlined" {{action "scrollToTop"}}>
         <span class="icon is-small">
           <i class="far fa-angle-up" aria-hidden="true"></i>
@@ -27,8 +27,16 @@
       </button>
     </div>
 
-    <div class="column is-10 is-padingless">
+    <div class="column is-8 is-padingless">
       <SearchBox @searchTerm={{searchTerm}} @onChange={{action (mut searchTerm)}} />
+    </div>
+
+    <div class="column is-2 is-padingless has-text-right">
+      {{#if kitchenState.isOpen}}
+        <button class="button {{if openCloseShop.isRunning "is-loading"}} is-danger" onclick={{perform openCloseShop false}} disabled={{openCloseShop.isRunning}}>Zavřít</button>
+      {{else}}
+        <button class="button {{if openCloseShop.isRunning "is-loading"}} is-success" onclick={{perform openCloseShop true}} disabled={{openCloseShop.isRunning}}>Otevřit</button>
+      {{/if}}
     </div>
   </div>
 </div>
