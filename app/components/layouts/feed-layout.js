@@ -38,19 +38,7 @@ export default class FeedLayoutComponent extends Component {
     }
 
     @action
-    scrollToCurrentSlot() {
-        // TODO: now minus 30 minutes
-        const minutes = new Date().getMinutes();
-        const hours = new Date().getHours();
-        var m = ((((minutes + 15) / 30) | 0) * 30) % 60;
-        var h = (((minutes / 105 + 0.5) | 0) + hours) % 24;
-
-        const slot = `${h.toString().padStart(2, 0)}${m.toString().padStart(2, 0)}`;
-
-        const element = document.getElementById(`feed-time-slot-${slot}`);
-
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
+    scrollToTop() {
+        document.getElementById('scrollToHere').scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
     }
 }
