@@ -33,3 +33,12 @@
     padding: $gap;
     position: relative;
 }
+
+.feed-layout__loading {
+    position: fixed;
+    top: 2px;
+    left: 10px;
+    width: 32px;
+    height: 38px;
+    opacity: 0.2;
+}

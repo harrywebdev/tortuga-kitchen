@@ -4,6 +4,14 @@
   {{/notification}}
 {{/each}}
 
+{{#if orderStatus.changeStatus.isRunning}}
+  <div class="feed-layout__loading">
+    <span class="fa-2x">
+      <i class="fal fa-spinner fa-spin"></i>
+    </span>
+  </div>
+{{/if}}
+
 <div class="feed-layout__filters">
   <Layouts::FeedFilters @ordersCounts={{ordersCountsByStatus}} />
 </div>

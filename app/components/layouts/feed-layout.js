@@ -5,6 +5,7 @@ import { not } from '@ember/object/computed';
 
 export default class FeedLayoutComponent extends Component {
     @service flashMessages;
+    @service orderStatus;
 
     classNames = ['feed-layout'];
 
