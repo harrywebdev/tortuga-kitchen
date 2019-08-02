@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { action, computed } from '@ember/object';
-import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
+import { task } from 'ember-concurrency';
 
 export default class OrderCardComponent extends Component {
     @service customerInspector;
@@ -17,8 +17,6 @@ export default class OrderCardComponent extends Component {
 
     hideTimeSlot = false;
     hasOptionsMenuOpen = false;
-
-    @alias('orderManager.changeStatus') changeStatus;
 
     @computed('order.is_collapsed')
     get isExpandedForAria() {
@@ -40,6 +38,16 @@ export default class OrderCardComponent extends Component {
         return this.order.is_collapsed;
     }
 
+    @(task(function*() {
+        yield this.orderManager.pushOrderDown.unlinked().perform(this.order);
+    }).drop())
+    pushOrderDown;
+
+    @(task(function*(status) {
+        yield this.orderManager.changeStatus.unlinked().perform(this.order, status);
+    }).drop())
+    changeStatus;
+
     @action
     toggleOptionsMenu() {
         this.toggleProperty('hasOptionsMenuOpen');
@@ -52,32 +60,27 @@ export default class OrderCardComponent extends Component {
 
     @action
     markOrderAsNew() {
-        this.orderManager.changeStatus.perform(this.order, 'received');
+        this.changeStatus.perform('received');
     }
 
     @action
     markOrderAsReadyForPickup() {
-        this.orderManager.changeStatus.perform(this.order, 'made');
+        this.changeStatus.perform('made');
     }
 
     @action
     markOrderAsOnTheGrill() {
-        this.orderManager.changeStatus.perform(this.order, 'processing');
+        this.changeStatus.perform('processing');
     }
 
     @action
     markOrderAsRejectedOrCancelled() {
-        this.orderManager.changeStatus.perform(this.order, this.order.get('isNew') ? 'rejected' : 'cancelled');
+        this.changeStatus.perform(this.order.get('isNew') ? 'rejected' : 'cancelled');
     }
 
     @action
     markOrderAsCompleted() {
-        this.orderManager.changeStatus.perform(this.order, 'completed');
-    }
-
-    @action
-    pushOrderDown() {
-        this.orderManager.pushOrderDown.perform(this.order);
+        this.changeStatus.perform('completed');
     }
 
     @action

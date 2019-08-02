@@ -77,7 +77,7 @@
       {{/if}}
 
       {{#if order.isNew}}
-        <button class="button is-dark is-outlined" {{action "pushOrderDown"}} disabled={{orderManager.pushOrderDown.isRunning}}>
+        <button class="button is-dark is-outlined" onclick={{perform pushOrderDown}} disabled={{pushOrderDown.isRunning}}>
           <span class="icon is-small">
             <i class="far fa-exclamation-circle"></i>
           </span>
