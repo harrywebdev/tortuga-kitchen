@@ -24,6 +24,7 @@ trim_trailing_whitespace = false
 
 [*.js]
 quote_type = single
+indent_size = 4
 
 [*.json]
 insert_final_newline = false

@@ -1,11 +1,12 @@
 import Component from '@ember/component';
 import { action, computed } from '@ember/object';
+import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
-    
+
 export default class OrderCardComponent extends Component {
     @service customerInspector;
     @service feedFilters;
-    @service flashMessages;
+    @service orderStatus;
 
     classNames = ['order-card', 'card'];
     classNameBindings = ['order.status', 'isCollapsed:order-card--is-collapsed'];
@@ -13,6 +14,11 @@ export default class OrderCardComponent extends Component {
 
     // model
     order = {};
+
+    hideTimeSlot = false;
+    hasOptionsMenuOpen = false;
+
+    @alias('orderStatus.changeStatus') changeStatus;
 
     @computed('order.is_collapsed')
     get isExpandedForAria() {
@@ -34,30 +40,6 @@ export default class OrderCardComponent extends Component {
         return this.order.is_collapsed;
     }
 
-    hideTimeSlot = false;
-
-    hasOptionsMenuOpen = false;
-
-    /**
-     * Change status instantly.
-     * @param {string} status
-     */
-    changeStatus(status) {
-        this.set('previousOrderState', this.order.get('status'));
-
-        this.order.set('status', status);
-        this.order.save().catch(reason => {
-            const error =
-                reason.errors && reason.errors.length
-                    ? `${reason.errors[0].title} - ${reason.errors[0].detail}`
-                    : JSON.stringify(reason);
-
-            console.error('Could not update Order status', error);
-            this.flashMessages.danger(`Could not update Order status: ${error}`);
-            this.order.set('status', this.get('previousOrderState'));
-        });
-    }
-
     @action
     toggleOptionsMenu() {
         this.toggleProperty('hasOptionsMenuOpen');
@@ -70,32 +52,27 @@ export default class OrderCardComponent extends Component {
 
     @action
     markOrderAsNew() {
-        this.changeStatus('received');
+        this.orderStatus.changeStatus.perform(this.order, 'received');
     }
 
     @action
     markOrderAsReadyForPickup() {
-        this.changeStatus('made');
+        this.orderStatus.changeStatus.perform(this.order, 'made');
     }
 
     @action
     markOrderAsOnTheGrill() {
-        this.changeStatus('processing');
+        this.orderStatus.changeStatus.perform(this.order, 'processing');
     }
 
     @action
     markOrderAsRejectedOrCancelled() {
-        this.changeStatus(this.order.get('isNew') ? 'rejected' : 'cancelled');
-    }
-
-    @action
-    resetOrderToPreviousState() {
-        this.changeStatus(this.previousOrderState, true);
+        this.orderStatus.changeStatus.perform(this.order, this.order.get('isNew') ? 'rejected' : 'cancelled');
     }
 
     @action
     markOrderAsCompleted() {
-        this.changeStatus('completed');
+        this.orderStatus.changeStatus.perform(this.order, 'completed');
     }
 
     @action

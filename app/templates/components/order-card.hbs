@@ -59,14 +59,14 @@
 
     <div class="panel-block order-card__actions">
       {{#if order.isTrashed}}
-        <button class="button is-dark is-outlined" {{action "markOrderAsNew"}}>
+        <button class="button is-dark is-outlined" {{action "markOrderAsNew"}} disabled={{changeStatus.isRunning}}>
           <span class="icon is-small">
             <i class="far fa-undo"></i>
           </span>
           <span>Zpět</span>
         </button>
       {{else}}
-        <button class="button is-danger {{if order.isNew "is-outlined"}}"  {{action "markOrderAsRejectedOrCancelled"}}>
+        <button class="button is-danger {{if order.isNew "is-outlined"}}" {{action "markOrderAsRejectedOrCancelled"}} disabled={{changeStatus.isRunning}}>
           <span class="icon">
             <i class={{if order.isNew "far fa-ban" "fas fa-exclamation-circle"}}></i>
           </span>
@@ -75,7 +75,7 @@
       {{/if}}
 
       {{#if order.isNew}}
-        <button class="button is-dark is-outlined" {{action "pushOrderDown"}}>
+        <button class="button is-dark is-outlined" {{action "pushOrderDown"}} disabled={{changeStatus.isRunning}}>
           <span class="icon is-small">
             <i class="far fa-exclamation-circle"></i>
           </span>
@@ -84,7 +84,7 @@
       {{/if}}
 
       {{#if order.isNew}}
-        <button class="button is-warning" {{action "markOrderAsOnTheGrill"}}>
+        <button class="button is-warning" {{action "markOrderAsOnTheGrill"}} disabled={{changeStatus.isRunning}}>
           <span class="icon is-small">
             <i class="far fa-hat-chef"></i>
           </span>
@@ -94,13 +94,13 @@
 
       {{#if order.isOnTheGrill}}
         <div>
-          <button class="button is-dark is-outlined" {{action "markOrderAsNew"}}>
+          <button class="button is-dark is-outlined" {{action "markOrderAsNew"}} disabled={{changeStatus.isRunning}}>
             <span class="icon is-small">
               <i class="far fa-undo"></i>
             </span>
             <span>Zpět</span>
           </button>
-          <button class="button is-info" {{action "markOrderAsReadyForPickup"}}>
+          <button class="button is-info" {{action "markOrderAsReadyForPickup"}} disabled={{changeStatus.isRunning}}>
             <span class="icon is-small">
               <i class="far fa-check-circle"></i>
             </span>
@@ -111,13 +111,13 @@
 
       {{#if order.isReadyForPickup}}
         <div>
-          <button class="button is-dark is-outlined" {{action "markOrderAsOnTheGrill"}}>
+          <button class="button is-dark is-outlined" {{action "markOrderAsOnTheGrill"}} disabled={{changeStatus.isRunning}}>
             <span class="icon is-small">
               <i class="far fa-undo"></i>
             </span>
             <span>Zpět</span>
           </button>
-          <button class="button is-success" {{action "markOrderAsCompleted"}}>
+          <button class="button is-success" {{action "markOrderAsCompleted"}} disabled={{changeStatus.isRunning}}>
             <span class="icon is-small">
               <i class="far fa-treasure-chest"></i>
             </span>
