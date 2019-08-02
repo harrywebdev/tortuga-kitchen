@@ -4,12 +4,15 @@ import { inject as service } from '@ember/service';
 import { task, timeout } from 'ember-concurrency';
 import config from 'tortuga-kitchen/config/environment';
 
-export default class IndexRoute extends Route.extend({
+export default class IndexRoute extends Route {
+    @service store;
+    @service flashMessages;
+
     /**
      * Fallback polling in case the socket is down
      * TODO: check for websocket connection status
      */
-    pollForOrders: task(function*() {
+    @(task(function*() {
         let attempts = 0;
 
         // TODO: only do this when websocket does not work
@@ -40,10 +43,8 @@ export default class IndexRoute extends Route.extend({
         }
     })
         .cancelOn('deactivate')
-        .restartable(),
-}) {
-    @service store;
-    @service flashMessages;
+        .restartable())
+    pollForOrders;
 
     model() {
         return this.store.findAll('order', { include: 'order-items' });
