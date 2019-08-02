@@ -1,15 +1,21 @@
+{{#each flashMessages.queue as |flash|}}
+  {{#notification flash=flash}}
+    {{flash.message}}
+  {{/notification}}
+{{/each}}
+
 <div class="feed-layout__filters">
-  <Layouts::FeedFilters />
+  <Layouts::FeedFilters @ordersCounts={{ordersCountsByStatus}} />
 </div>
 
 <div class="feed-layout__controls">
   <div class="columns is-marginless is-mobile">
     <div class="column is-2 is-padingless">
-      <button class="button is-dark is-outlined" {{action "scrollToCurrentSlot"}}>
+      <button class="button is-dark is-outlined" {{action "scrollToTop"}}>
         <span class="icon is-small">
-          <i class="far fa-stopwatch" aria-hidden="true"></i>
+          <i class="far fa-angle-up" aria-hidden="true"></i>
         </span>
-        <span>Teď</span>
+        <span>Nahoru</span>
       </button>
     </div>
 
@@ -20,6 +26,8 @@
 </div>
 
 <div class="feed-layout__items js-scrollable-feed">
+  <div id="scrollToHere"></div>
+
   {{#each ordersByTimeSlot as |slot|}}
     <Layouts::FeedTimeSlot @slot={{slot.title}} @orders={{slot.orders}} />
   {{/each}}

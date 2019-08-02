@@ -14,10 +14,10 @@
       </span> --}}
 
       <span class="order-card__customer-name">
-        {{order.customer_name}} (+420 731 456 789)
+        {{order.customer.name}} ({{order.customer.mobile_number}})
 
         {{#unless hideTimeSlot}}
-          &mdash; {{order.order_time}}
+          &mdash; {{order.orderTimeSlot}}
         {{/unless}}
       </span>
     </span>
@@ -32,47 +32,21 @@
       <a class="is-active">items</a>
       <a>customer</a>
     </p> --}}
-    {{#if randomBurgers}}
+    {{#each order.orderItems as |item|}}
       <a class="order-card__item">
         <span>
-          <span class="icon">
-            <i class="fas fa-cheeseburger" aria-hidden="true"></i>
-          </span>
-          {{randomBurgers}} &times; Admiral Double Classic
+          {{!-- emoji is "nice-to-have" (in DB part of Category)
+            <span class="icon">
+              <i class="fas fa-cheeseburger" aria-hidden="true"></i>
+            </span>
+          --}}
+          {{item.quantity}} &times; {{item.title}}
         </span>
         <span class="order-card__item-price">
-          300 Kč
+          {{item.formatted_total_price}}
         </span>
       </a>
-    {{/if}}
-
-    {{#if randomSides}}
-      <a class="order-card__item">
-        <span>
-          <span class="icon">
-            <i class="fas fa-french-fries" aria-hidden="true"></i>
-          </span>
-          {{randomSides}} &times; Grilovane Bramburky
-        </span>
-        <span class="order-card__item-price">
-          80 Kč
-        </span>
-      </a>
-    {{/if}}
-
-    {{#if randomDrinks}}
-      <a class="order-card__item">
-        <span>
-          <span class="icon">
-            <i class="fas fa-glass" aria-hidden="true"></i>
-          </span>
-          {{randomDrinks}} &times; Pilsner Urquell
-        </span>
-        <span class="order-card__item-price">
-          50 Kč
-        </span>
-      </a>
-    {{/if}}
+    {{/each}}
 
     <a class="order-card__item order-card__item--total">
       <span>
@@ -85,7 +59,7 @@
 
     <div class="panel-block order-card__actions">
       {{#if order.isTrashed}}
-        <button class="button is-dark is-outlined" {{action "resetOrderToPreviousState"}}>
+        <button class="button is-dark is-outlined" {{action "markOrderAsNew"}}>
           <span class="icon is-small">
             <i class="far fa-undo"></i>
           </span>
@@ -109,7 +83,6 @@
         </button>
       {{/if}}
 
-
       {{#if order.isNew}}
         <button class="button is-warning" {{action "markOrderAsOnTheGrill"}}>
           <span class="icon is-small">
@@ -120,17 +93,25 @@
       {{/if}}
 
       {{#if order.isOnTheGrill}}
-        <button class="button is-info" {{action "markOrderAsReadyForPickup"}}>
-          <span class="icon is-small">
-            <i class="far fa-check-circle"></i>
-          </span>
-          <span>Připraveno na vyzvednutí</span>
-        </button>
+        <div>
+          <button class="button is-dark is-outlined" {{action "markOrderAsNew"}}>
+            <span class="icon is-small">
+              <i class="far fa-undo"></i>
+            </span>
+            <span>Zpět</span>
+          </button>
+          <button class="button is-info" {{action "markOrderAsReadyForPickup"}}>
+            <span class="icon is-small">
+              <i class="far fa-check-circle"></i>
+            </span>
+            <span>Připraveno na vyzvednutí</span>
+          </button>
+        </div>
       {{/if}}
 
       {{#if order.isReadyForPickup}}
         <div>
-          <button class="button is-dark is-outlined" {{action "markOrderAsNew"}}>
+          <button class="button is-dark is-outlined" {{action "markOrderAsOnTheGrill"}}>
             <span class="icon is-small">
               <i class="far fa-undo"></i>
             </span>

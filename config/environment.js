@@ -25,6 +25,16 @@ module.exports = function(environment) {
         api: {
             host: '<insert production host here>',
         },
+
+        flashMessageDefaults: {
+            destroyOnClick: true,
+            timeout: 5000,
+        },
+
+        polling: {
+            timeout: 20000,
+            retries: 5,
+        },
     };
 
     if (environment === 'development') {
@@ -33,6 +43,7 @@ module.exports = function(environment) {
         // ENV.APP.LOG_TRANSITIONS = true;
         // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
         // ENV.APP.LOG_VIEW_LOOKUPS = true;
+        ENV.api.host = 'https://tortuga.backend.test';
     }
 
     if (environment === 'test') {

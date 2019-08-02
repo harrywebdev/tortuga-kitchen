@@ -1,35 +1,65 @@
 import Route from '@ember/routing/route';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { task, timeout } from 'ember-concurrency';
+import config from 'tortuga-kitchen/config/environment';
 
-export default class IndexRoute extends Route {
+export default class IndexRoute extends Route.extend({
+    /**
+     * Fallback polling in case the socket is down
+     * TODO: check for websocket connection status
+     */
+    pollForOrders: task(function*() {
+        let attempts = 0;
+
+        // TODO: only do this when websocket does not work
+
+        while (true) {
+            yield timeout(config.polling.timeout);
+
+            try {
+                const orders = yield this.get('store').findAll('order', { include: 'order-items', reload: true });
+                attempts = 0;
+
+                const model = this.controllerFor('index').get('model');
+                if (!model) {
+                    this.controllerFor('index').set('model', orders);
+                    this.transitionTo('index');
+                } else {
+                    model.addObjects(orders);
+                }
+            } catch (e) {
+                attempts++;
+                if (attempts > config.polling.retries) {
+                    this.flashMessages.danger('Ajaj, asi spadnul server. Zkus obnovit stranku.', {
+                        sticky: true,
+                    });
+                    return false;
+                }
+            }
+        }
+    })
+        .cancelOn('deactivate')
+        .restartable(),
+}) {
     @service store;
+    @service flashMessages;
 
     model() {
-        // HACK: generate ordrs
-        let times = [];
-        for (var j = 0; j < 10; j++) {
-            let hour = new Date().getHours() + j;
-            hour = hour > 23 ? hour - 24 : hour;
-            times.push(`${hour}:${'00'}`.padStart(5, '0'));
-            times.push(`${hour}:${'30'}`.padStart(5, '0'));
-        }
+        return this.store.findAll('order', { include: 'order-items' });
+    }
 
-        let orders = [];
-        for (var i = 0; i <= 15; i++) {
-            orders.push(
-                this.store.createRecord('order', {
-                    id: i + 1,
-                    order_time: times[i % 3 || i / 3],
-                    customer_name: ['Hery Potr', 'Nikki Lauda', 'Tom Morello', 'Dolph Lundgren'][
-                        Math.floor(Math.random() * Math.floor(4))
-                    ],
-                    status: 'received',
-                    total_amount: Math.floor(Math.random() * Math.floor(100400)),
-                    is_takeaway: Math.floor(Math.random() * Math.floor(2)),
-                    is_collapsed: !times.slice(0, 2).includes(times[i % 3 || i / 3]) || i > 5,
-                })
-            );
-        }
-        return orders;
+    afterModel() {
+        this._super(...arguments);
+        this.get('pollForOrders').perform();
+    }
+
+    @action
+    error(error) {
+        console.error('Route error', error);
+
+        // try to come back up
+        this.get('pollForOrders').perform();
+        return true;
     }
 }
