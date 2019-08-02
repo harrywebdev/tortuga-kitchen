@@ -22,9 +22,11 @@
       </span>
     </span>
 
-    <span class="icon">
-      <i class="far fa-angle-{{if order.is_collapsed "down" "up" }}" aria-hidden="true"></i>
-    </span>
+    {{#if order.failedSave}}
+      <span class="icon has-text-danger">
+        <i class="fal fa-exclamation-circle"></i>
+      </span>
+    {{/if}}
   </div>
 
   <div class="order-card__body">
@@ -75,7 +77,7 @@
       {{/if}}
 
       {{#if order.isNew}}
-        <button class="button is-dark is-outlined" {{action "pushOrderDown"}} disabled={{changeStatus.isRunning}}>
+        <button class="button is-dark is-outlined" {{action "pushOrderDown"}} disabled={{orderManager.pushOrderDown.isRunning}}>
           <span class="icon is-small">
             <i class="far fa-exclamation-circle"></i>
           </span>

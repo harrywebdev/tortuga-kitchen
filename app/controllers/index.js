@@ -16,7 +16,10 @@ export default class IndexController extends Controller {
     get feedSlots() {
         const orders = this.get('feedOrders');
 
-        return orders.map(order => order.get('orderTimeSlot')).uniq();
+        return orders
+            .map(order => order.get('orderTimeSlot'))
+            .uniq()
+            .sort();
     }
 
     @computed('model.@each.{status}')

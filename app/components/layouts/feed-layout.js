@@ -5,7 +5,7 @@ import { not } from '@ember/object/computed';
 
 export default class FeedLayoutComponent extends Component {
     @service flashMessages;
-    @service orderStatus;
+    @service orderManager;
 
     classNames = ['feed-layout'];
 
@@ -16,6 +16,11 @@ export default class FeedLayoutComponent extends Component {
     @not('filteredOrdersBySearch.length') noOrdersToShow;
 
     searchTerm = '';
+
+    @computed('orderManager.changeStatus.isRunning')
+    get busy() {
+        return this.orderManager.changeStatus.isRunning;
+    }
 
     @computed('orders.[]', 'searchTerm')
     get filteredOrdersBySearch() {

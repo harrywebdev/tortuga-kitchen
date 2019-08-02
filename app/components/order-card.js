@@ -6,7 +6,7 @@ import { inject as service } from '@ember/service';
 export default class OrderCardComponent extends Component {
     @service customerInspector;
     @service feedFilters;
-    @service orderStatus;
+    @service orderManager;
 
     classNames = ['order-card', 'card'];
     classNameBindings = ['order.status', 'isCollapsed:order-card--is-collapsed'];
@@ -18,7 +18,7 @@ export default class OrderCardComponent extends Component {
     hideTimeSlot = false;
     hasOptionsMenuOpen = false;
 
-    @alias('orderStatus.changeStatus') changeStatus;
+    @alias('orderManager.changeStatus') changeStatus;
 
     @computed('order.is_collapsed')
     get isExpandedForAria() {
@@ -52,45 +52,32 @@ export default class OrderCardComponent extends Component {
 
     @action
     markOrderAsNew() {
-        this.orderStatus.changeStatus.perform(this.order, 'received');
+        this.orderManager.changeStatus.perform(this.order, 'received');
     }
 
     @action
     markOrderAsReadyForPickup() {
-        this.orderStatus.changeStatus.perform(this.order, 'made');
+        this.orderManager.changeStatus.perform(this.order, 'made');
     }
 
     @action
     markOrderAsOnTheGrill() {
-        this.orderStatus.changeStatus.perform(this.order, 'processing');
+        this.orderManager.changeStatus.perform(this.order, 'processing');
     }
 
     @action
     markOrderAsRejectedOrCancelled() {
-        this.orderStatus.changeStatus.perform(this.order, this.order.get('isNew') ? 'rejected' : 'cancelled');
+        this.orderManager.changeStatus.perform(this.order, this.order.get('isNew') ? 'rejected' : 'cancelled');
     }
 
     @action
     markOrderAsCompleted() {
-        this.orderStatus.changeStatus.perform(this.order, 'completed');
+        this.orderManager.changeStatus.perform(this.order, 'completed');
     }
 
     @action
     pushOrderDown() {
-        throw Error('This should be done on the server.');
-
-        // eslint-disable-next-line
-        const [all, hours, minutes] = this.order.get('order_time').match(/([0-9]{2}):([0-9]{2})/);
-
-        // a little hacky - 00 get +30
-        if (minutes !== '30') {
-            return this.order.set('order_time', `${hours}:30`);
-        }
-
-        // otherwise bump hour and set to 00
-        const newHour = hours === '23' ? '00' : (parseInt(hours, 10) + 1).toString().padStart(2, '0');
-
-        this.order.set('order_time', `${newHour}:00`);
+        this.orderManager.pushOrderDown.perform(this.order);
     }
 
     @action
