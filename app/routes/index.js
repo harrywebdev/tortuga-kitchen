@@ -9,6 +9,32 @@ export default class IndexRoute extends Route {
     @service kitchenState;
     @service store;
 
+    model() {
+        return this.store.query('order', { include: 'order-items', limit: 2 });
+    }
+
+    afterModel() {
+        this._super(...arguments);
+        this.pollForOrders.perform();
+
+        this.store.find('setting', '1').then(
+            settings => {
+                this.kitchenState.initShop(settings);
+            },
+            () => {
+                this.flashMessages.danger('Ajaj, asi spadnul server. Zkus obnovit stránku.', {
+                    sticky: true,
+                });
+            }
+        );
+    }
+
+    setupController(controller, model) {
+        super.setupController(...arguments);
+
+        controller.set('model', model.toArray());
+    }
+
     /**
      * Fallback polling in case the socket is down
      * TODO: check for websocket connection status
@@ -46,26 +72,6 @@ export default class IndexRoute extends Route {
         .cancelOn('deactivate')
         .restartable())
     pollForOrders;
-
-    model() {
-        return this.store.findAll('order', { include: 'order-items' });
-    }
-
-    afterModel() {
-        this._super(...arguments);
-        this.pollForOrders.perform();
-
-        this.store.find('setting', '1').then(
-            settings => {
-                this.kitchenState.initShop(settings);
-            },
-            () => {
-                this.flashMessages.danger('Ajaj, asi spadnul server. Zkus obnovit stránku.', {
-                    sticky: true,
-                });
-            }
-        );
-    }
 
     @action
     error(error) {

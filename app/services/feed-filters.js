@@ -1,4 +1,5 @@
 import Service from '@ember/service';
+import { computed } from '@ember/object';
 
 export default class FeedFiltersService extends Service {
     groups = {
@@ -10,6 +11,11 @@ export default class FeedFiltersService extends Service {
     };
 
     filters = this.groups.all;
+
+    @computed('filters.[]')
+    get isDefault() {
+        return this.filters === this.groups.all;
+    }
 
     resetFilters() {
         this.set('filters', this.groups.all);

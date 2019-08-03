@@ -1,9 +1,11 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { task } from 'ember-concurrency';
 
 export default class IndexController extends Controller {
     @service feedFilters;
+    @service flashMessages;
 
     @computed('model.@each.{status,orderTimeSlot}', 'feedFilters.filters.[]')
     get feedOrders() {
@@ -36,4 +38,21 @@ export default class IndexController extends Controller {
             return acc;
         }, {});
     }
+
+    /**
+     * @param {string} cursor pagination token
+     * @param {string} dir "before" or "after"
+     */
+    @(task(function*(cursor, dir) {
+        try {
+            const params = { include: 'order-items', limit: 5 };
+            params[dir] = cursor;
+
+            const orders = yield this.store.query('order', params);
+            this.model.addObjects(orders.toArray());
+        } catch (reason) {
+            this.flashMessages.danger('Ajaj, nějak se to porouchalo. Zkus to znovu.');
+        }
+    }).drop())
+    loadMoreOrders;
 }

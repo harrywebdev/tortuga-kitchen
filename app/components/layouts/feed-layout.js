@@ -1,10 +1,11 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { action, computed } from '@ember/object';
-import { not } from '@ember/object/computed';
+import { not, alias } from '@ember/object/computed';
 import { task } from 'ember-concurrency';
 
 export default class FeedLayoutComponent extends Component {
+    @service feedFilters;
     @service flashMessages;
     @service kitchenState;
     @service orderManager;
@@ -16,6 +17,7 @@ export default class FeedLayoutComponent extends Component {
     slots = [];
 
     @not('filteredOrdersBySearch.length') noOrdersToShow;
+    @alias('feedFilters.isDefault') showPagination;
 
     searchTerm = '';
 
@@ -43,6 +45,16 @@ export default class FeedLayoutComponent extends Component {
                 orders: this.filteredOrdersBySearch.filter(order => order.orderTimeSlot === slot),
             };
         });
+    }
+
+    @computed('rawOrders.[]')
+    get lastOrderPaginationPrevToken() {
+        return this.orders.sortBy('order_time').get('firstObject.pagination.prev');
+    }
+
+    @computed('rawOrders.[]')
+    get lastOrderPaginationNextToken() {
+        return this.orders.sortBy('order_time').get('lastObject.pagination.next');
     }
 
     @(task(function*(open) {

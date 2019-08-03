@@ -24,6 +24,9 @@ export default Model.extend({
     created_at: attr('date'),
     updated_at: attr('date'),
 
+    // hacky pagination
+    pagination: attr(),
+
     // local presentation things
     is_collapsed: attr('boolean', { defaultValue: false }),
     is_in_grill_feed: attr('boolean', { defaultValue: true }),

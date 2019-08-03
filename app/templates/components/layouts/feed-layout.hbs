@@ -42,9 +42,25 @@
 <div class="feed-layout__items js-scrollable-feed">
   <div id="scrollToHere"></div>
 
+  {{#if showPagination}}
+    {{#if lastOrderPaginationPrevToken}}
+      <div class="has-text-centered feed-layout__pagination-prev">
+        <button class="button is-light is-medium {{if loadMoreOrders.isRunning "is-loading"}}" disabled={{loadMoreOrders.isRunning}} onclick={{perform loadMoreOrders lastOrderPaginationPrevToken "before"}}>Načíst předchozí objednávky</button>
+      </div>
+    {{/if}}
+  {{/if}}
+
   {{#each ordersByTimeSlot as |slot|}}
     <Layouts::FeedTimeSlot @slot={{slot.title}} @orders={{slot.orders}} />
   {{/each}}
+
+  {{#if showPagination}}
+    {{#if lastOrderPaginationNextToken}}
+      <div class="has-text-centered feed-layout__pagination-next">
+        <button class="button is-light is-medium {{if loadMoreOrders.isRunning "is-loading"}}" disabled={{loadMoreOrders.isRunning}} onclick={{perform loadMoreOrders lastOrderPaginationNextToken "after"}}>Načíst další objednávky</button>
+      </div>
+    {{/if}}
+  {{/if}}
 
   {{#if noOrdersToShow}}
     <article class="message">
