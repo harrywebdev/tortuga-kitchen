@@ -39,7 +39,7 @@ export default class OrderManagerService extends Service {
             'order_time',
             moment(order.order_time)
                 .add(30, 'm')
-                .format('YYYY-MM-DD HH:mm:ss')
+                .toISOString(true)
         );
 
         try {
