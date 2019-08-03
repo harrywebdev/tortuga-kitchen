@@ -1,0 +1,4 @@
+<div class="field">
+  <input id="switchRoundedDanger" type="checkbox" class="switch is-medium is-rounded {{if isOn "is-success" "is-danger"}}" checked={{isOn}} disabled={{switchAction.isRunning}} onclick={{perform switchAction isOff}}>
+  <label for="switchRoundedDanger">{{if isOn onLabel offLabel}}</label>
+</div>

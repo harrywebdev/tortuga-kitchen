@@ -27,16 +27,14 @@
       </button>
     </div>
 
-    <div class="column is-8 is-padingless">
+    <div class="column is-7 is-padingless">
       <SearchBox @searchTerm={{searchTerm}} @onChange={{action (mut searchTerm)}} />
     </div>
 
-    <div class="column is-2 is-padingless has-text-right">
-      {{#if kitchenState.isOpen}}
-        <button class="button {{if openCloseShop.isRunning "is-loading"}} is-danger" onclick={{perform openCloseShop false}} disabled={{openCloseShop.isRunning}}>Zavřít</button>
-      {{else}}
-        <button class="button {{if openCloseShop.isRunning "is-loading"}} is-success" onclick={{perform openCloseShop true}} disabled={{openCloseShop.isRunning}}>Otevřit</button>
-      {{/if}}
+    <div class="column is-3 is-padingless has-text-right">
+      <div class="feed-layout__on-off-switch">
+        <OnOffSwitch @isOn={{kitchenState.isOpen}} @onLabel="Zavřít" @offLabel="Otevřít" @switchAction={{openCloseShop}} />
+      </div>
     </div>
   </div>
 </div>
