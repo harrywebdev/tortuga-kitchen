@@ -6,6 +6,7 @@ import { task } from 'ember-concurrency';
 export default class OrderCardComponent extends Component {
     @service customerInspector;
     @service feedFilters;
+    @service optionsModal;
     @service orderManager;
 
     classNames = ['order-card', 'card'];
@@ -40,8 +41,8 @@ export default class OrderCardComponent extends Component {
     }).drop())
     pushOrderDown;
 
-    @(task(function*(status) {
-        yield this.orderManager.changeStatus.unlinked().perform(this.order, status);
+    @(task(function*(status, otherAttributes = null) {
+        yield this.orderManager.changeStatus.unlinked().perform(this.order, status, otherAttributes);
     }).drop())
     changeStatus;
 
@@ -67,7 +68,47 @@ export default class OrderCardComponent extends Component {
 
     @action
     markOrderAsRejectedOrCancelled() {
-        this.changeStatus.perform(this.order.get('isNew') ? 'rejected' : 'cancelled');
+        // new order = reject
+        if (this.order.get('isNew')) {
+            const rejectOptions = [
+                { value: 'no_time', title: 'Není čas, nestíháme.', contextClass: 'is-dark' },
+                { value: 'missing_product', title: 'Nemáme objednaný produkt.', contextClass: 'is-dark' },
+                { value: 'on_request', title: 'Na žádost zákazníka.', contextClass: 'is-dark' },
+                { value: 'no_reason', title: 'Bez důvodu.', contextClass: 'is-dark' },
+                { value: 'is_invalid', title: 'Je to blbost.', contextClass: 'is-dark' },
+            ];
+            this.optionsModal.open(
+                'Odmítnutí objednávky',
+                'Z jakého důvodu se chystáš tuhle objednávku odmítnout?',
+                'is-danger',
+                rejectOptions,
+                reason => {
+                    return this.orderManager.changeStatus.unlinked().perform(this.order, 'rejected', {
+                        rejected_reason: reason,
+                    });
+                }
+            );
+        }
+        // already spent time = cancel
+        else {
+            const cancelOptions = [
+                { value: 'new_order', title: 'Nová objednávka.', contextClass: 'is-danger is-outlined' },
+                { value: 'no_reason', title: 'Bez důvodu.', contextClass: 'is-danger is-outlined' },
+                { value: 'no_show', title: 'Zákazník nepřišel :(', contextClass: 'is-danger' },
+                { value: 'on_request', title: 'Na žádost zákazníka.', contextClass: 'is-danger' },
+            ];
+            this.optionsModal.open(
+                'Zrušení objednávky',
+                'Z jakého důvodu se chystáš tuhle objednávku odmítnout?',
+                'is-danger',
+                cancelOptions,
+                reason => {
+                    return this.orderManager.changeStatus.perform(this.order, 'cancelled', {
+                        cancelled_reason: reason,
+                    });
+                }
+            );
+        }
     }
 
     @action

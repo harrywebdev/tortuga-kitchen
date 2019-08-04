@@ -1,0 +1,23 @@
+<div class="modal-background" {{action "close" on="click"}} role="button"></div>
+<div class="modal-content">
+  <article class="message {{contextClass}}">
+    <div class="message-header">
+      <p>{{title}}</p>
+      <button class="delete" aria-label="delete" {{action "close"}}></button>
+    </div>
+    <div class="message-body">
+      <div class="content">
+        <p>{{description}}</p>
+      </div>
+
+      <div class="columns is-multiline is-centered">
+        {{#each options as |option|}}
+          <div class="column is-narrow">
+            <button class="button {{option.contextClass}}" onclick={{perform chooseOption option.value}} disabled={{chooseOption.isRunning}}>{{option.title}}</button>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </article>
+</div>
+<button class="modal-close is-large" aria-label="close" {{action "close"}}></button>

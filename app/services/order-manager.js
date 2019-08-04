@@ -10,13 +10,22 @@ export default class OrderManagerService extends Service {
      * Change status instantly.
      * @param {Model} order
      * @param {string} status
+     * @param {object|null} otherAttributes
      */
-    @(task(function*(order, status) {
+    @(task(function*(order, status, otherAttributes = null) {
         order.set('status', status);
+
+        if (otherAttributes !== null) {
+            Object.keys(otherAttributes).forEach(key => {
+                order.set(key, otherAttributes[key]);
+            });
+        }
 
         try {
             yield order.save();
             order.set('failedSave', false);
+
+            return true;
         } catch (reason) {
             order.rollbackAttributes();
 
@@ -30,6 +39,8 @@ export default class OrderManagerService extends Service {
 
             console.error('Could not update Order status', error);
             this.flashMessages.danger(`Could not update Order status: ${error}`);
+
+            return false;
         }
     }).drop())
     changeStatus;

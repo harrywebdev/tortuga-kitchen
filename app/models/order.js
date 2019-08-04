@@ -12,6 +12,8 @@ export default Model.extend({
     payment_type: attr('string'),
     order_time: attr('string'),
     is_takeaway: attr('boolean', { defaultValue: false }),
+    rejected_reason: attr('string'),
+    cancelled_reason: attr('string'),
 
     status: attr('string'),
     subtotal_amount: attr('number'),
