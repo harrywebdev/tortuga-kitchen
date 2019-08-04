@@ -5,12 +5,17 @@
 /dist/
 /tmp/
 
+# deployment
+/deploy_dist/
+
 # dependencies
 /bower_components/
 /node_modules/
 
 # misc
 /.env*
+!/.env.deploy.example
+!/.env.example
 /.pnp*
 /.sass-cache
 /connect.lock

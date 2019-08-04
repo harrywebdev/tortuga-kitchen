@@ -23,7 +23,7 @@ module.exports = function(environment) {
         },
 
         api: {
-            host: '<insert production host here>',
+            host: process.env.API_HOST,
         },
 
         flashMessageDefaults: {
@@ -47,7 +47,6 @@ module.exports = function(environment) {
         // ENV.APP.LOG_TRANSITIONS = true;
         // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
         // ENV.APP.LOG_VIEW_LOOKUPS = true;
-        ENV.api.host = 'https://tortuga.backend.test';
     }
 
     if (environment === 'test') {

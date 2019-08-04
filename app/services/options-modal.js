@@ -19,7 +19,7 @@ export default class OptionsModalService extends Service {
      * @param {array} options Array of options {value: string, title: string}
      * @param {function} action Action to call on option click {return true to close modal}
      */
-    open(title = '', body = '', contextClass = '', options = [], action, task) {
+    open(title = '', body = '', contextClass = '', options = [], action) {
         this.setProperties({
             title,
             body,
