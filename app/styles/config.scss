@@ -13,3 +13,9 @@ $filter-background-color-chest: rgba($success, 0.15);
 
 $filter-color-trash: $danger;
 $filter-background-color-trash: rgba($danger, 0.15);
+
+$spacing-regular: 16px;
+$spacing-half: $spacing-regular / 2;
+$spacing-double: $spacing-regular * 2;
+$spacing-more: $spacing-regular / 1.5;
+

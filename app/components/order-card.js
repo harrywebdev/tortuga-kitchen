@@ -15,9 +15,6 @@ export default class OrderCardComponent extends Component {
     // model
     order = {};
 
-    hideTimeSlot = false;
-    hasOptionsMenuOpen = false;
-
     @computed('order.is_collapsed')
     get isExpandedForAria() {
         return this.order.get('is_collapsed') ? 'false' : 'true';
@@ -47,11 +44,6 @@ export default class OrderCardComponent extends Component {
         yield this.orderManager.changeStatus.unlinked().perform(this.order, status);
     }).drop())
     changeStatus;
-
-    @action
-    toggleOptionsMenu() {
-        this.toggleProperty('hasOptionsMenuOpen');
-    }
 
     @action
     toggleExpandCollapse() {

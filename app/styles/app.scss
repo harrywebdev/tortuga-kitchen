@@ -1,13 +1,16 @@
 @charset "utf-8";
 
+// bulma overrides
 $gap: 8px; // from default 32px
+$modal-background-background-color: rgba(#000, 0.46);
+
 @import '../bulma/bulma.sass';
 
 $switch-background: $danger;
 @import '../bulma-switch/src/sass/index.sass';
 @import '../bulma-checkradio/dist/bulma-checkradio.sass';
 
-@import 'config/colors';
+@import 'config';
 
 @import 'layouts/error-page';
 @import 'layouts/master';
