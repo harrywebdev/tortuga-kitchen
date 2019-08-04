@@ -10,7 +10,7 @@ export default class IndexRoute extends Route {
     @service store;
 
     model() {
-        return this.store.query('order', { include: 'order-items', limit: 2 });
+        return this.store.query('order', { include: 'order-items', limit: 5 });
     }
 
     afterModel() {

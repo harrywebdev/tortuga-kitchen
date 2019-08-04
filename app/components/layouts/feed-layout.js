@@ -15,11 +15,15 @@ export default class FeedLayoutComponent extends Component {
     // model
     orders = [];
     slots = [];
+    searchTerm = '';
+
+    didInsertElement() {
+        super.didInsertElement(...arguments);
+        this.send('scrollToTop');
+    }
 
     @not('filteredOrdersBySearch.length') noOrdersToShow;
     @alias('feedFilters.isDefault') showPagination;
-
-    searchTerm = '';
 
     @computed('orderManager.changeStatus.isRunning')
     get busy() {
@@ -68,6 +72,8 @@ export default class FeedLayoutComponent extends Component {
 
     @action
     scrollToTop() {
-        document.getElementById('scrollToHere').scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+        document
+            .getElementById('scrollToHere')
+            .scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
     }
 }

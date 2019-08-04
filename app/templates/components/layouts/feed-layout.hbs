@@ -40,7 +40,6 @@
 </div>
 
 <div class="feed-layout__items js-scrollable-feed">
-  <div id="scrollToHere"></div>
 
   {{#if showPagination}}
     {{#if lastOrderPaginationPrevToken}}
@@ -49,6 +48,8 @@
       </div>
     {{/if}}
   {{/if}}
+
+  <div class="feed-layout__scroll-to-here" id="scrollToHere"></div>
 
   {{#each ordersByTimeSlot as |slot|}}
     <Layouts::FeedTimeSlot @slot={{slot.slot}} @orders={{slot.orders}} />
