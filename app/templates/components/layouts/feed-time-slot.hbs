@@ -1,9 +1,15 @@
 {{#if orders.length}}
   <div class="feed-time-slot__column-slot" role="button" {{action "toggleExpandCollapse"}} id={{slotId}} aria-role="button">
-    {{slot}}
+    <strong>{{title}}</strong>
     <span class="icon">
-      <i class="far fa-angle-{{if isExpandedAll "up" "down" }}" aria-hidden="true"></i>
+      {{#if isExpandedAll}}
+        <i class="far fa-angle-up" aria-hidden="true"></i>
+      {{else}}
+        <i class="far fa-angle-down" aria-hidden="true"></i>
+      {{/if}}
     </span>
+
+    <div>{{infoLabel}}</div>
   </div>
 
   <div class="feed-time-slot__column-orders">

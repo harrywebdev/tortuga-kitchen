@@ -12,7 +12,6 @@
 .feed-time-slot__column-slot {
     @extend .column;
     @extend .is-2;
-    font-weight: $weight-bold;
     padding-top: $gap * 3;
     text-align: center;
     cursor: pointer;

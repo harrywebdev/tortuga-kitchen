@@ -41,8 +41,8 @@ export default class FeedLayoutComponent extends Component {
     get ordersByTimeSlot() {
         return this.slots.map(slot => {
             return {
-                title: slot,
-                orders: this.filteredOrdersBySearch.filter(order => order.orderTimeSlot === slot),
+                slot: slot,
+                orders: this.filteredOrdersBySearch.filter(order => order.order_time === slot.datetime),
             };
         });
     }

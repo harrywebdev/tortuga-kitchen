@@ -7,7 +7,7 @@ export default class IndexController extends Controller {
     @service feedFilters;
     @service flashMessages;
 
-    @computed('model.@each.{status,orderTimeSlot}', 'feedFilters.filters.[]')
+    @computed('model.@each.{status,order_time}', 'feedFilters.filters.[]')
     get feedOrders() {
         const orders = this.get('model');
 
@@ -19,9 +19,9 @@ export default class IndexController extends Controller {
         const orders = this.get('feedOrders');
 
         return orders
-            .map(order => order.get('orderTimeSlot'))
+            .map(order => ({ datetime: order.get('order_time'), title: order.get('orderTimeSlot') }))
             .uniq()
-            .sort();
+            .sortBy('datetime');
     }
 
     @computed('model.@each.{status}')

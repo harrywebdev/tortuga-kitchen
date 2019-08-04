@@ -51,7 +51,7 @@
   {{/if}}
 
   {{#each ordersByTimeSlot as |slot|}}
-    <Layouts::FeedTimeSlot @slot={{slot.title}} @orders={{slot.orders}} />
+    <Layouts::FeedTimeSlot @slot={{slot.slot}} @orders={{slot.orders}} />
   {{/each}}
 
   {{#if showPagination}}

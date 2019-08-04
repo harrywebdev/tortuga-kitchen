@@ -31,6 +31,10 @@ module.exports = function(environment) {
             timeout: 5000,
         },
 
+        moment: {
+            includeLocales: ['cs'],
+        },
+
         polling: {
             timeout: 20000,
             retries: 5,

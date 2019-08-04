@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { action, computed } from '@ember/object';
+import moment from 'moment';
 
 export default class FeedTimeSlotComponent extends Component {
     classNames = ['feed-time-slot'];
@@ -10,9 +11,25 @@ export default class FeedTimeSlotComponent extends Component {
         return !this.orders.filter(order => order.is_collapsed).length;
     }
 
-    @computed('slot')
+    @computed('slot.datetime')
     get slotId() {
-        return 'feed-time-slot-' + this.slot.replace(/:/, '');
+        return 'feed-time-slot-' + this.slot.datetime.replace(/:/, '');
+    }
+
+    @computed('slot.title')
+    get title() {
+        return this.slot.title;
+    }
+
+    @computed('slot.datetime')
+    get infoLabel() {
+        const datetime = moment(this.slot.datetime);
+
+        if (datetime.format('D') != moment().format('D')) {
+            return datetime.format('dddd');
+        }
+
+        return '';
     }
 
     @action
