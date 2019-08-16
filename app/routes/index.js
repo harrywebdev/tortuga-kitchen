@@ -74,9 +74,7 @@ export default class IndexRoute extends Route {
     pollForOrders;
 
     @action
-    error(error) {
-        console.error('Route error', error);
-
+    error() {
         // try to come back up
         this.get('pollForOrders').perform();
         return true;

@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 import moment from 'moment';
 
 export default class OrderManagerService extends Service {
+    @service appLogger;
     @service flashMessages;
 
     /**
@@ -32,14 +33,13 @@ export default class OrderManagerService extends Service {
             // persist for visual indication
             order.set('failedSave', true);
 
-            const error =
-                reason.errors && reason.errors.length
-                    ? `${reason.errors[0].title} - ${reason.errors[0].detail}`
-                    : JSON.stringify(reason);
+            let serverError = null;
+            if (reason.errors && reason.errors.length) {
+                serverError = JSON.stringify(reason.errors[0]);
+            }
 
-            console.error('Could not update Order status', error);
-            this.flashMessages.danger(`Could not update Order status: ${error}`);
-
+            this.appLogger.error(reason, true, serverError);
+            this.flashMessages.danger(`Ajaj, nepovedlo se změnit stav objednávky. Zkus prosím znovu.`);
             return false;
         }
     }).drop())
@@ -62,13 +62,13 @@ export default class OrderManagerService extends Service {
             // persist for visual indication
             order.set('failedSave', true);
 
-            const error =
-                reason.errors && reason.errors.length
-                    ? `${reason.errors[0].title} - ${reason.errors[0].detail}`
-                    : JSON.stringify(reason);
+            let serverError = null;
+            if (reason.errors && reason.errors.length) {
+                serverError = JSON.stringify(reason.errors[0]);
+            }
 
-            console.error('Could not update Order time', error);
-            this.flashMessages.danger(`Could not update Order time: ${error}`);
+            this.appLogger.error(reason, true, serverError);
+            this.flashMessages.danger(`Ajaj, nepovedlo se změnit čas objednávky. Zkus prosím znovu.`);
         }
     }).drop())
     pushOrderDown;

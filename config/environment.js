@@ -4,6 +4,7 @@ module.exports = function(environment) {
     let ENV = {
         modulePrefix: 'tortuga-kitchen',
         environment,
+        version: '0.5.0',
         rootURL: '/',
         locationType: 'auto',
         EmberENV: {
@@ -39,6 +40,11 @@ module.exports = function(environment) {
             timeout: 20000,
             retries: 5,
         },
+
+        sentry: {
+            dsn: process.env.SENTRY_DSN,
+            debug: environment === 'development',
+        },
     };
 
     if (environment === 'development') {
@@ -64,6 +70,9 @@ module.exports = function(environment) {
     if (environment === 'production') {
         // here you can enable a production-specific feature
     }
+
+    // set Sentry release
+    ENV.sentry.release = ENV.version;
 
     return ENV;
 };

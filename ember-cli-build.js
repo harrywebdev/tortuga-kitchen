@@ -11,6 +11,9 @@ module.exports = function(defaults) {
         sassOptions: {
             includePaths: ['node_modules/bulma', 'node_modules/bulma-switch', 'node_modules/bulma-checkradio'],
         },
+        sourcemaps: {
+            enabled: true,
+        },
     });
 
     // Use `app.import` to add additional libraries to the generated
