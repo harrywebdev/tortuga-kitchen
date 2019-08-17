@@ -2,6 +2,9 @@ import DS from 'ember-data';
 import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import moment from 'moment';
+import cancelReasons from 'tortuga-kitchen/dicts/cancel-reasons';
+import rejectReasons from 'tortuga-kitchen/dicts/reject-reasons';
+
 const { Model, attr, hasMany, belongsTo } = DS;
 
 export default Model.extend({
@@ -51,6 +54,22 @@ export default Model.extend({
 
     isTrashed: computed('status', function() {
         return ['rejected', 'cancelled'].includes(this.get('status'));
+    }),
+
+    isCancelledByCustomer: computed('status', 'cancelled_reason', function() {
+        return this.get('status') === 'cancelled' && this.get('cancelled_reason') === 'delayed_order';
+    }),
+
+    cancelledReason: computed('status', 'cancelled_reason', function() {
+        return this.get('status') === 'cancelled' && this.get('cancelled_reason')
+            ? `Zrušeno: ${cancelReasons[this.get('cancelled_reason')].title}`
+            : null;
+    }),
+
+    rejectedReason: computed('status', 'rejected_reason', function() {
+        return this.get('status') === 'rejected' && this.get('rejected_reason')
+            ? `Odmítnuto: ${rejectReasons[this.get('rejected_reason')].title}`
+            : null;
     }),
 
     formattedTotalAmount: alias('formatted_total_amount'),

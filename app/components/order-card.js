@@ -2,6 +2,8 @@ import Component from '@ember/component';
 import { action, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency';
+import cancelReasons from 'tortuga-kitchen/dicts/cancel-reasons';
+import rejectReasons from 'tortuga-kitchen/dicts/reject-reasons';
 
 export default class OrderCardComponent extends Component {
     @service customerInspector;
@@ -70,13 +72,14 @@ export default class OrderCardComponent extends Component {
     markOrderAsRejectedOrCancelled() {
         // new order = reject
         if (this.order.get('isNew')) {
-            const rejectOptions = [
-                { value: 'no_time', title: 'Není čas, nestíháme.', contextClass: 'is-dark' },
-                { value: 'missing_product', title: 'Nemáme objednaný produkt.', contextClass: 'is-dark' },
-                { value: 'on_request', title: 'Na žádost zákazníka.', contextClass: 'is-dark' },
-                { value: 'no_reason', title: 'Bez důvodu.', contextClass: 'is-dark' },
-                { value: 'is_invalid', title: 'Je to blbost.', contextClass: 'is-dark' },
-            ];
+            const rejectOptions = Object.keys(rejectReasons).map(key => {
+                return {
+                    value: key,
+                    title: rejectReasons[key].title,
+                    contextClass: 'is-dark',
+                };
+            });
+
             this.optionsModal.open(
                 'Odmítnutí objednávky',
                 [
@@ -94,16 +97,18 @@ export default class OrderCardComponent extends Component {
         }
         // already spent time = cancel
         else {
-            const cancelOptions = [
-                { value: 'new_order', title: 'Nová objednávka.', contextClass: 'is-danger is-outlined' },
-                { value: 'no_reason', title: 'Bez důvodu.', contextClass: 'is-danger is-outlined' },
-                { value: 'no_show', title: 'Zákazník nepřišel :(', contextClass: 'is-danger' },
-                { value: 'on_request', title: 'Na žádost zákazníka.', contextClass: 'is-danger' },
-            ];
+            const cancelOptions = Object.keys(cancelReasons).map(key => {
+                return {
+                    value: key,
+                    title: cancelReasons[key].title,
+                    contextClass: `is-danger ${cancelReasons[key].affects_score ? '' : 'is-outlined'}`,
+                };
+            });
+
             this.optionsModal.open(
                 'Zrušení objednávky',
                 [
-                    'Z jakého důvodu se chystáš tuhle objednávku zrušenit?',
+                    'Z jakého důvodu se chystáš tuhle objednávku zrušit?',
                     'Tlačítka s výplní jsou důvody, které se odrazí negativně na zákaznikovo skóre.',
                 ],
                 'is-danger',

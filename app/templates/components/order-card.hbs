@@ -57,12 +57,26 @@
 
     <div class="panel-block order-card__actions">
       {{#if order.isTrashed}}
-        <button class="button is-dark is-outlined" {{action "markOrderAsNew"}} disabled={{changeStatus.isRunning}}>
-          <span class="icon is-small">
-            <i class="far fa-undo"></i>
-          </span>
-          <span>Zpět</span>
-        </button>
+        {{#if order.isCancelledByCustomer}}
+          <span>Zrušeno SMS odpovědí zákazníka</span>
+        {{else}}
+          <div class="level">
+            <button class="button is-dark is-outlined" {{action "markOrderAsNew"}} disabled={{changeStatus.isRunning}}>
+              <span class="icon is-small">
+                <i class="far fa-undo"></i>
+              </span>
+              <span>Reset</span>
+            </button>
+
+            {{#if order.cancelledReason}}
+              <span class="order-card__item-reason">{{order.cancelledReason}}</span>
+            {{/if}}
+
+            {{#if order.rejectedReason}}
+              <span class="order-card__item-reason">{{order.rejectedReason}}</span>
+            {{/if}}
+          </div>
+        {{/if}}
       {{else}}
         <button class="button is-danger {{if order.isNew "is-outlined"}}" {{action "markOrderAsRejectedOrCancelled"}} disabled={{changeStatus.isRunning}}>
           <span class="icon">
@@ -96,7 +110,7 @@
             <span class="icon is-small">
               <i class="far fa-undo"></i>
             </span>
-            <span>Zpět</span>
+            <span>Zpět mezi vše</span>
           </button>
           <button class="button is-info" {{action "markOrderAsReadyForPickup"}} disabled={{changeStatus.isRunning}}>
             <span class="icon is-small">
@@ -113,7 +127,7 @@
             <span class="icon is-small">
               <i class="far fa-undo"></i>
             </span>
-            <span>Zpět</span>
+            <span>Zpět na gril</span>
           </button>
           <button class="button is-success" {{action "markOrderAsCompleted"}} disabled={{changeStatus.isRunning}}>
             <span class="icon is-small">
@@ -129,7 +143,7 @@
           <span class="icon is-small">
             <i class="far fa-undo"></i>
           </span>
-          <span>Zpět</span>
+          <span>Zpět na vyzvednutí</span>
         </button>
       {{/if}}
     </div>
