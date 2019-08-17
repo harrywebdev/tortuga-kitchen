@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { action } from '@ember/object';
+import { computed, action } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency';
@@ -12,9 +12,18 @@ export default class OptionsModalComponent extends Component {
 
     @alias('optionsModal.isOpen') isOpen;
     @alias('optionsModal.title') title;
-    @alias('optionsModal.body') description;
     @alias('optionsModal.contextClass') contextClass;
     @alias('optionsModal.options') options;
+
+    @computed('optionsModal.body.[]')
+    get description() {
+        return this.optionsModal.body.length ? this.optionsModal.body[0] : '';
+    }
+
+    @computed('optionsModal.body.[]')
+    get moreInfo() {
+        return this.optionsModal.body.length > 1 ? this.optionsModal.body[1] : '';
+    }
 
     @(task(function*(option) {
         const result = yield this.optionsModal.action(option);

@@ -79,7 +79,10 @@ export default class OrderCardComponent extends Component {
             ];
             this.optionsModal.open(
                 'Odmítnutí objednávky',
-                'Z jakého důvodu se chystáš tuhle objednávku odmítnout?',
+                [
+                    'Z jakého důvodu se chystáš tuhle objednávku odmítnout?',
+                    'Zákazník bude o zrušení informován SMSkou.',
+                ],
                 'is-danger',
                 rejectOptions,
                 reason => {
@@ -99,7 +102,10 @@ export default class OrderCardComponent extends Component {
             ];
             this.optionsModal.open(
                 'Zrušení objednávky',
-                'Z jakého důvodu se chystáš tuhle objednávku odmítnout?',
+                [
+                    'Z jakého důvodu se chystáš tuhle objednávku zrušenit?',
+                    'Tlačítka s výplní jsou důvody, které se odrazí negativně na zákaznikovo skóre.',
+                ],
                 'is-danger',
                 cancelOptions,
                 reason => {
