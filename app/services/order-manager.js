@@ -62,6 +62,12 @@ export default class OrderManagerService extends Service {
             // persist for visual indication
             order.set('failedSave', true);
 
+            // check if it's actually just not acceptable order time
+            if (reason.errors && reason.errors.length && reason.errors[0].status === 409) {
+                this.flashMessages.danger(`Objednávku nelze posunout mimo otevírací dobu.`);
+                return;
+            }
+
             let serverError = null;
             if (reason.errors && reason.errors.length) {
                 serverError = JSON.stringify(reason.errors[0]);
