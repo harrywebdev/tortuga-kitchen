@@ -25,6 +25,8 @@ module.exports = function(environment) {
 
         api: {
             host: process.env.API_HOST,
+            client_id: process.env.API_CLIENT_ID,
+            client_secret: process.env.API_CLIENT_SECRET,
         },
 
         flashMessageDefaults: {

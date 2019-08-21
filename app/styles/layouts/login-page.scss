@@ -1,0 +1,18 @@
+.login-page {
+    position: relative;
+}
+
+.login-form {
+    max-width: 400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.login-logo {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.1;
+}

@@ -3,8 +3,9 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { task, timeout } from 'ember-concurrency';
 import config from 'tortuga-kitchen/config/environment';
+import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
-export default class IndexRoute extends Route {
+export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin, {}) {
     @service flashMessages;
     @service kitchenState;
     @service store;

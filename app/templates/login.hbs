@@ -1,0 +1,46 @@
+<section class="hero is-fullheight login-page">
+  <div class="hero-body">
+    <img src="/assets/images/header.png" alt="" class="login-logo">
+
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+          <form class="box login-form">
+
+            {{#if error}}
+              <article class="message is-danger">
+                <div class="message-body">
+                  {{error}}
+                </div>
+              </article>
+            {{/if}}
+
+            <div class="field">
+              <label for="username" class="label">Jméno</label>
+              <div class="control has-icons-left">
+                <input type="email" placeholder="e.g. bobsmith@gmail.com" class="input" name="username" required oninput={{action (mut username) value="target.value"}}>
+                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="password" class="label">Heslo</label>
+              <div class="control has-icons-left">
+                <input type="password" placeholder="*******" class="input" name="password" required oninput={{action (mut password) value="target.value"}}>
+                <span class="icon is-small is-left">
+                  <i class="fa fa-lock"></i>
+                </span>
+              </div>
+            </div>
+            <div class="field has-text-centered">
+              <button type="submit" class="button is-dark {{if login.isRunning "is-loading"}}" onclick={{perform login username password}} disabled={{isSubmitDisabled}}>
+                Přihlásit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
