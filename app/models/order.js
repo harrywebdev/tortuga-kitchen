@@ -11,6 +11,8 @@ export default Model.extend({
     orderItems: hasMany('order-item'),
     customer: belongsTo('customer'),
 
+    hash_id: attr('string'),
+
     delivery_type: attr('string'),
     payment_type: attr('string'),
     order_time: attr('string'),
@@ -81,5 +83,9 @@ export default Model.extend({
 
     orderTimeSlot: computed('order_time', function() {
         return moment(this.get('order_time')).format('HH:mm');
+    }),
+
+    hashIdFormatted: computed('hash_id', function() {
+        return `${this.hash_id.substr(0, 3)}-${this.hash_id.substr(3)}`;
     }),
 });
