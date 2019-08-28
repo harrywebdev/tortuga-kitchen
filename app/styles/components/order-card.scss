@@ -5,6 +5,12 @@
     transition: all 250ms ease-in-out;
     box-shadow: 1px 1px 2px 0px rgba(10, 10, 10, 0.1);
 
+    &.order-card--is-frozen {
+        cursor: not-allowed;
+        pointer-events: none;
+        opacity: 0.7;
+    }
+
     &.order-card--disappear {
         opacity: 0;
     }

@@ -12,11 +12,22 @@ export default class OrderCardComponent extends Component {
     @service orderManager;
 
     classNames = ['order-card', 'card'];
-    classNameBindings = ['order.status', 'isCollapsed:order-card--is-collapsed'];
+    classNameBindings = ['order.status', 'isCollapsed:order-card--is-collapsed', 'isFrozen:order-card--is-frozen'];
     attributeBindings = ['isExpandedForAria:aria-expanded'];
 
     // model
     order = {};
+
+    @computed('order.order_time')
+    get isFrozen() {
+        // if its after midnight < 5am, we still open yesterday's orders for manipulation
+        if (moment().format('H') < 5) {
+            return moment(this.order.order_time) < moment().subtract(1, 'day');
+        }
+
+        // has to be the same day
+        return moment(this.order.order_time).format('YYYY-MM-DD') != moment().format('YYYY-MM-DD');
+    }
 
     @computed('order.is_collapsed')
     get isExpandedForAria() {
