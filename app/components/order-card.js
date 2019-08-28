@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import { action, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency';
+import moment from 'moment';
 import cancelReasons from 'tortuga-kitchen/dicts/cancel-reasons';
 import rejectReasons from 'tortuga-kitchen/dicts/reject-reasons';
 
