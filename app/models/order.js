@@ -11,7 +11,7 @@ export default Model.extend({
     orderItems: hasMany('order-item'),
     customer: belongsTo('customer'),
 
-    hash_id: attr('string'),
+    hash_id: attr('string', { defaultValue: '' }),
 
     delivery_type: attr('string'),
     payment_type: attr('string'),
@@ -86,6 +86,8 @@ export default Model.extend({
     }),
 
     hashIdFormatted: computed('hash_id', function() {
-        return `${this.hash_id.substr(0, 3)}-${this.hash_id.substr(3)}`;
+        const hashId = this.hash_id || '';
+
+        return `${hashId.substr(0, 3)}-${hashId.substr(3)}`;
     }),
 });
