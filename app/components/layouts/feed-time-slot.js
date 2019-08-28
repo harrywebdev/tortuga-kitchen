@@ -13,7 +13,7 @@ export default class FeedTimeSlotComponent extends Component {
 
     @computed('slot.datetime')
     get slotId() {
-        return 'feed-time-slot-' + this.slot.datetime.replace(/:/, '');
+        return 'feed-time-slot-' + this.slot.datetime.toISOString();
     }
 
     @computed('slot.title')
