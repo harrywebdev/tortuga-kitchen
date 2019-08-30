@@ -81,8 +81,12 @@ export default Model.extend({
         return this.get('total_amount') > 700 * 100;
     }),
 
-    orderTimeSlot: computed('order_time', function() {
+    orderTimeSlotTitle: computed('order_time', function() {
         return moment(this.get('order_time')).format('HH:mm');
+    }),
+
+    orderTimeSlotId: computed('order_time', function() {
+        return moment(this.get('order_time')).format('YYYYMMDDHHmm');
     }),
 
     hashIdFormatted: computed('hash_id', function() {

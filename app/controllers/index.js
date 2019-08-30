@@ -19,8 +19,12 @@ export default class IndexController extends Controller {
         const orders = this.get('feedOrders');
 
         return orders
-            .map(order => ({ datetime: order.get('order_time'), title: order.get('orderTimeSlot') }))
-            .uniqBy('datetime')
+            .map(order => ({
+                slot_id: order.get('orderTimeSlotId'),
+                datetime: order.get('order_time'),
+                title: order.get('orderTimeSlotTitle'),
+            }))
+            .uniqBy('slot_id')
             .sortBy('datetime');
     }
 

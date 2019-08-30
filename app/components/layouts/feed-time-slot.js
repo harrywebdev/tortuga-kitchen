@@ -11,9 +11,9 @@ export default class FeedTimeSlotComponent extends Component {
         return !this.orders.filter(order => order.is_collapsed).length;
     }
 
-    @computed('slot.datetime')
+    @computed('slot.slot_id')
     get slotId() {
-        return 'feed-time-slot-' + this.slot.datetime.toISOString();
+        return 'feed-time-slot-' + this.slot.slot_id;
     }
 
     @computed('slot.title')
