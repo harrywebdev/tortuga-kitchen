@@ -4,6 +4,7 @@ import { action, computed } from '@ember/object';
 
 export default class FeedFiltersComponent extends Component {
     @service feedFilters;
+    @service metrics;
 
     classNames = ['feed-filters'];
 
@@ -35,25 +36,30 @@ export default class FeedFiltersComponent extends Component {
     @action
     noFilter() {
         this.feedFilters.resetFilters();
+        this.metrics.trackPage({ page: '/vse', title: 'Vse' });
     }
 
     @action
     filterByGrill() {
         this.feedFilters.setToGrill();
+        this.metrics.trackPage({ page: '/grill', title: 'Grill' });
     }
 
     @action
     filterByPickup() {
         this.feedFilters.setToReadyForPickup();
+        this.metrics.trackPage({ page: '/vyzvednout', title: 'Vyzvednout' });
     }
 
     @action
     filterByChest() {
         this.feedFilters.setToCompleted();
+        this.metrics.trackPage({ page: '/hotovo', title: 'Hotovo' });
     }
 
     @action
     filterByTrash() {
         this.feedFilters.setToTrashed();
+        this.metrics.trackPage({ page: '/kos', title: 'Kos' });
     }
 }

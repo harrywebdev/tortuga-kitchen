@@ -138,14 +138,4 @@ export default class OrderCardComponent extends Component {
     markOrderAsCompleted() {
         this.changeStatus.perform('completed');
     }
-
-    @action
-    inspectCustomer() {
-        // TODO: pass in real customer
-        this.customerInspector.inspect({
-            name: 'Hery Potr',
-            mobile_number: '732676850',
-            reg_type: 'mobile',
-        });
-    }
 }

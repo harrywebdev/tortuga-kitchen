@@ -2,6 +2,8 @@ import Service from '@ember/service';
 import { task } from 'ember-concurrency';
 import { inject as service } from '@ember/service';
 import moment from 'moment';
+import OrderStatusChangedEvent from 'tortuga-kitchen/events/order-status-changed';
+import OrderDelayedEvent from 'tortuga-kitchen/events/order-delayed';
 
 export default class OrderManagerService extends Service {
     @service appLogger;
@@ -25,6 +27,8 @@ export default class OrderManagerService extends Service {
         try {
             yield order.save();
             order.set('failedSave', false);
+
+            this.appLogger.reportToAnalytics(new OrderStatusChangedEvent(status));
 
             return true;
         } catch (reason) {
@@ -56,6 +60,8 @@ export default class OrderManagerService extends Service {
         try {
             yield order.save();
             order.set('failedSave', false);
+
+            this.appLogger.reportToAnalytics(new OrderDelayedEvent(order.order_time));
         } catch (reason) {
             order.rollbackAttributes();
 

@@ -34,6 +34,19 @@ module.exports = function(environment) {
             timeout: 5000,
         },
 
+        metricsAdapters: [
+            {
+                name: 'GoogleAnalytics',
+                environments: ['development', 'alpha', 'beta', 'production'],
+                config: {
+                    id: process.env.GOOGLE_ANALYTICS_ID,
+                    debug: environment === 'development',
+                    trace: environment === 'development',
+                    sendHitTask: environment !== 'development',
+                },
+            },
+        ],
+
         moment: {
             includeLocales: ['cs'],
         },

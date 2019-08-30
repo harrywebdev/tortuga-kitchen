@@ -2,8 +2,11 @@ import Service from '@ember/service';
 import { not, alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency';
+import KitchenClosedEvent from 'tortuga-kitchen/events/kitchen-closed';
+import KitchenOpenedEvent from 'tortuga-kitchen/events/kitchen-opened';
 
 export default class KitchenStateService extends Service {
+    @service appLogger;
     @service flashMessages;
     @service store;
 
@@ -27,6 +30,8 @@ export default class KitchenStateService extends Service {
                 sticky: true,
             });
         }
+
+        this.appLogger.reportToAnalytics(new KitchenClosedEvent());
     }).drop())
     closeShop;
 
@@ -41,6 +46,8 @@ export default class KitchenStateService extends Service {
                 sticky: true,
             });
         }
+
+        this.appLogger.reportToAnalytics(new KitchenOpenedEvent());
     }).drop())
     openShop;
 }
