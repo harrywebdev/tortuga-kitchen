@@ -81,6 +81,7 @@
     "bulma-switch": "^2.0.0",
     "ember-auto-import": "^1.5.2",
     "ember-cli-moment-shim": "^3.7.1",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "push.js": "^1.0.12"
   }
 }

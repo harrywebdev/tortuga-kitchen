@@ -39,7 +39,7 @@ module.exports = function(environment) {
         },
 
         polling: {
-            timeout: 20000,
+            timeout: 30000,
             retries: 5,
         },
 
@@ -55,6 +55,7 @@ module.exports = function(environment) {
         // ENV.APP.LOG_TRANSITIONS = true;
         // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
         // ENV.APP.LOG_VIEW_LOOKUPS = true;
+        ENV.polling.timeout = 5000;
     }
 
     if (environment === 'test') {

@@ -8,6 +8,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin, {}) {
     @service flashMessages;
     @service kitchenState;
+    @service notifier;
     @service store;
 
     model() {
@@ -49,7 +50,7 @@ export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin, {}
             yield timeout(config.polling.timeout);
 
             try {
-                const orders = yield this.get('store').findAll('order', { include: 'order-items', reload: true });
+                const orders = yield this.store.findAll('order', { include: 'order-items', reload: true });
                 attempts = 0;
 
                 const model = this.controllerFor('index').get('model');
@@ -57,7 +58,18 @@ export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin, {}
                     this.controllerFor('index').set('model', orders);
                     this.transitionTo('index');
                 } else {
+                    const modelOrderIds = model.map(order => order.id);
+
+                    // add orders
                     model.addObjects(orders);
+
+                    // notify if order is not present in the model already
+                    const newOrders = orders.filter(order => !modelOrderIds.includes(order.id));
+                    if (newOrders.length > 0) {
+                        this.notifier.notify(
+                            newOrders.length === 1 ? 'Nová objednávka' : `Nové objednávky (${newOrders.length})`
+                        );
+                    }
                 }
             } catch (e) {
                 attempts++;
