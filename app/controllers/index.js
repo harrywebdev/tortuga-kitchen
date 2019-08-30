@@ -20,9 +20,9 @@ export default class IndexController extends Controller {
 
         return orders
             .map(order => ({
-                slot_id: order.get('orderTimeSlotId'),
-                datetime: order.get('order_time'),
-                title: order.get('orderTimeSlotTitle'),
+                slot_id: order.orderTimeSlotId,
+                datetime: order.order_time,
+                title: order.orderTimeSlotTitle,
             }))
             .uniqBy('slot_id')
             .sortBy('datetime');

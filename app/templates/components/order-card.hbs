@@ -1,32 +1,45 @@
 <nav class="panel">
-  <div class="panel-heading order-card__heading" role="button" {{action "toggleExpandCollapse"}} aria-role="button">
-    <span class="order-card__heading-customer">
-      {{#if order.is_takeaway}}
-        <span class="tag order-card__heading-badge is-dark">S</span>
-      {{/if}}
+  <div class="panel-heading order-card__header" role="button" {{action "toggleExpandCollapse"}} aria-role="button">
+    <div class="level">
+      <div class="level-left">
+        {{#if order.is_takeaway}}
+          <div class="level-item">
+            <span class="tag order-card__heading-badge is-dark">S</span>
+          </div>
+        {{/if}}
 
-      {{#if order.hasHighPriceWarning}}
-        <span class="tag order-card__heading-badge is-warning">Kč</span>
-      {{/if}}
+        <div class="level-item">
+          <span class="order-card__customer-name">
+            {{order.customer.name}}
+          </span>
+          ({{order.customer.mobile_number}})
+        </div>
+      </div>
 
-      {{!-- <span class="icon">
-        <i class="fas fa-user-circle"></i>
-      </span> --}}
+      <div class="level-right">
+        {{#if order.failedSave}}
+          <div class="level-item">
+            <span class="has-text-danger">
+              <i class="fal fa-exclamation-circle"></i>
+            </span>
+          </div>
+        {{/if}}
 
-      <span class="order-card__customer-name">
-        {{order.customer.name}} ({{order.customer.mobile_number}})
-      </span>
-    </span>
+        {{#if order.is_delayed}}
+          <div class="level-item">
+            <span class="has-text-dark">
+              <i class="fas fa-clock"></i>
+            </span>
+          </div>
+        {{/if}}
 
-    {{#if order.failedSave}}
-      <span class="icon has-text-danger">
-        <i class="fal fa-exclamation-circle"></i>
-      </span>
-    {{/if}}
-
-    <strong class="tag is-white is-medium">
-      Kód: {{order.hashIdFormatted}}
-    </strong>
+        <div class="level-item">
+          <strong class="tag is-white is-medium">
+            Kód: {{order.hashIdFormatted}}
+          </strong>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="order-card__body">
@@ -82,12 +95,18 @@
           </div>
         {{/if}}
       {{else}}
-        <button class="button is-danger {{if order.isNew "is-outlined"}}" {{action "markOrderAsRejectedOrCancelled"}} disabled={{changeStatus.isRunning}}>
-          <span class="icon">
-            <i class={{if order.isNew "far fa-ban" "fas fa-exclamation-circle"}}></i>
-          </span>
-          <span>Zrušit</span>
-        </button>
+        <div class="level">
+          <button class="button is-danger {{if order.isNew "is-outlined"}}" {{action "markOrderAsRejectedOrCancelled"}} disabled={{changeStatus.isRunning}}>
+            <span class="icon">
+              <i class={{if order.isNew "far fa-ban" "fas fa-exclamation-circle"}}></i>
+            </span>
+            <span>Zrušit</span>
+          </button>
+
+          {{#if order.isDelayedAndPending}}
+            <span class="order-card__item-reason">Spožděná objednávka. Nepotvrzeno zákaníkem.</span>
+          {{/if}}
+        </div>
       {{/if}}
 
       {{#if order.isNew}}

@@ -95,13 +95,30 @@
             border-right: 1px solid $filter-color-trash;
         }
     }
+
+    &.ignored {
+        opacity: 0.6;
+        background: $filter-background-color-ignored;
+
+        .panel-heading {
+            border-color: $filter-color-ignored;
+            background: $filter-color-ignored;
+            color: #fff;
+        }
+
+        .panel-block {
+            border-color: $filter-color-ignored;
+        }
+
+        .order-card__item {
+            border-left: 1px solid $filter-color-ignored;
+            border-right: 1px solid $filter-color-ignored;
+        }
+    }
 }
 
-.order-card__heading {
+.order-card__header {
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     font-size: $size-5;
     font-weight: $weight-normal;
     padding: 0.4em 0.75em;
@@ -111,14 +128,8 @@
     }
 }
 
-.order-card__heading-customer {
-    display: flex;
-    align-items: center;
-}
-
 .order-card__heading-badge {
     font-weight: $weight-bold;
-    margin-right: 4px;
 }
 
 .order-card__body {
@@ -135,6 +146,10 @@
 
 .order-card__actions {
     justify-content: space-between;
+
+    & > .level {
+        margin-bottom: 0;
+    }
 }
 
 .order-card__item {
@@ -172,7 +187,8 @@
 }
 
 .order-card__customer-name {
-    margin-left: 4px;
+    font-weight: $weight-semibold;
+    margin-right: 4px;
 }
 
 .order-card__item-reason {

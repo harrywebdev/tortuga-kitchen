@@ -17,6 +17,7 @@ export default Model.extend({
     payment_type: attr('string'),
     order_time: attr('date'),
     is_takeaway: attr('boolean', { defaultValue: false }),
+    is_delayed: attr('boolean', { defaultValue: false }),
     rejected_reason: attr('string'),
     cancelled_reason: attr('string'),
 
@@ -56,6 +57,10 @@ export default Model.extend({
 
     isTrashed: computed('status', function() {
         return ['rejected', 'cancelled'].includes(this.get('status'));
+    }),
+
+    isDelayedAndPending: computed('status', 'is_delayed', function() {
+        return this.get('status') === 'ignored' && this.get('is_delayed');
     }),
 
     isCancelledByCustomer: computed('status', 'cancelled_reason', function() {
