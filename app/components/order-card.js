@@ -26,8 +26,11 @@ export default class OrderCardComponent extends Component {
             return moment(this.order.order_time) < moment().subtract(1, 'day');
         }
 
-        // has to be the same day
-        return moment(this.order.order_time).format('YYYY-MM-DD') != moment().format('YYYY-MM-DD');
+        // older than today
+        let threshold = moment().subtract(1, 'day');
+        threshold.set({ hour: 23, minute: 50, second: 50, millisecond: 0 });
+
+        return moment(this.order.order_time) < threshold;
     }
 
     @computed('order.is_collapsed')
