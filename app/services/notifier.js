@@ -5,12 +5,15 @@ import Push from 'push.js';
 export default class NotifierService extends Service {
     @service flashMessages;
 
+    isEnabled = false;
+
     constructor() {
         super(...arguments);
 
         Push.Permission.request(
             () => {
                 this.notify('Notifikace zapnuty!');
+                this.set('isEnabled', true);
             },
             () => {
                 this.flashMessages.danger('Doporučuju zapnout notifikace - stačí obnovit stránku a dotaz potvrdit.');
@@ -19,6 +22,10 @@ export default class NotifierService extends Service {
     }
 
     notify(title = '', text = '') {
+        if (!this.isEnabled) {
+            return;
+        }
+
         if (!title) {
             return;
         }
