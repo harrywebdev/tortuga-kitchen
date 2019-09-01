@@ -42,7 +42,13 @@
     width: 32px;
     height: 38px;
     opacity: 0.5;
-    font-size: 14px;
+    font-size: 2em;
+
+    // placeholder
+    .fa-exclamation-triangle:after {
+        content: '⚠️';
+        font-style: normal;
+    }
 }
 
 .feed-layout__on-off-switch {

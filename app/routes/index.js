@@ -12,12 +12,19 @@ export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin, {}
     @service websocket;
     @service store;
 
+    beforeModel() {
+        super.beforeModel(...arguments);
+
+        // now when authenticate we can log out
+        this.websocket.connect();
+    }
+
     model() {
         return this.store.query('order', { include: 'order-items', limit: 5 });
     }
 
     afterModel() {
-        this._super(...arguments);
+        super.afterModel(...arguments);
         this.pollForOrders.perform();
         this._realtimeOrderLoading();
 
@@ -103,7 +110,7 @@ export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin, {}
      * Listen on socket `order.received` event, create Order record from that data and push it to the model
      */
     _realtimeOrderLoading() {
-        this.websocket.subscribe('orders', [
+        this.websocket.subscribe('private-orders', [
             {
                 eventName: 'order.received',
                 eventHandler: data => {
