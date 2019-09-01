@@ -12,6 +12,14 @@
   </div>
 {{/if}}
 
+{{#unless websocket.isOnline}}
+  <div class="feed-layout__warning has-text-danger">
+    <span class="fa-2x">
+      <i class="fad fa-exclamation-triangle"></i>
+    </span>
+  </div>
+{{/unless}}
+
 <div class="feed-layout__filters">
   <Layouts::FeedFilters @ordersCounts={{ordersCountsByStatus}} />
 </div>

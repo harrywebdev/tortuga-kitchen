@@ -30,11 +30,15 @@ export default class WebSocketService extends Service {
         pusher.connection.bind('state_change', states => {
             this.set('isOnline', states.current === 'connected');
 
-            if (!this.isOnline) {
-                this.flashMessages.warn(
-                    `Nemám připojení k serveru v reálném čase, budu se ptát každých ${config.polling.timeout /
-                        1000} vteřin.`
+            if (states.current === 'unavailable') {
+                return this.flashMessages.warning(
+                    `Nedaří se připojení k serveru v reálném čase. Objednávky budu tedy obnovovat každých ${config
+                        .polling.timeout / 1000} vteřin.`
                 );
+            }
+
+            if (states.current === 'connected' && states.previous === 'connecting') {
+                this.flashMessages.success('Připojení k serveru v reálném čase obnoveno.');
             }
         });
 

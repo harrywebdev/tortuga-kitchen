@@ -34,13 +34,15 @@
     position: relative;
 }
 
+.feed-layout__warning,
 .feed-layout__loading {
     position: fixed;
-    top: 2px;
-    left: 10px;
+    top: 4px;
+    left: 12px;
     width: 32px;
     height: 38px;
-    opacity: 0.2;
+    opacity: 0.5;
+    font-size: 14px;
 }
 
 .feed-layout__on-off-switch {

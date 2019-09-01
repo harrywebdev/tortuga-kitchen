@@ -9,6 +9,7 @@ export default class FeedLayoutComponent extends Component {
     @service flashMessages;
     @service kitchenState;
     @service orderManager;
+    @service websocket;
 
     classNames = ['feed-layout'];
 
