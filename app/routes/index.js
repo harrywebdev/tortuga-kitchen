@@ -9,6 +9,7 @@ export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin, {}
     @service flashMessages;
     @service kitchenState;
     @service notifier;
+    @service websocket;
     @service store;
 
     model() {
@@ -18,6 +19,7 @@ export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin, {}
     afterModel() {
         this._super(...arguments);
         this.pollForOrders.perform();
+        this._realtimeOrderLoading();
 
         this.store.find('setting', '1').then(
             settings => {
@@ -39,45 +41,28 @@ export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin, {}
 
     /**
      * Fallback polling in case the socket is down
-     * TODO: check for websocket connection status
      */
     @(task(function*() {
         let attempts = 0;
 
-        // TODO: only do this when websocket does not work
-
         while (true) {
             yield timeout(config.polling.timeout);
 
-            try {
-                const orders = yield this.store.findAll('order', { include: 'order-items', reload: true });
-                attempts = 0;
+            // only do long polling this when websocket does not work
+            if (!this.websocket.isOnline) {
+                try {
+                    const orders = yield this.store.findAll('order', { include: 'order-items', reload: true });
+                    attempts = 0;
 
-                const model = this.controllerFor('index').get('model');
-                if (!model) {
-                    this.controllerFor('index').set('model', orders);
-                    this.transitionTo('index');
-                } else {
-                    const modelOrderIds = model.map(order => order.id);
-
-                    // add orders
-                    model.addObjects(orders);
-
-                    // notify if order is not present in the model already
-                    const newOrders = orders.filter(order => !modelOrderIds.includes(order.id));
-                    if (newOrders.length > 0) {
-                        this.notifier.notify(
-                            newOrders.length === 1 ? 'Nová objednávka' : `Nové objednávky (${newOrders.length})`
-                        );
+                    this._addNewOrdersToModel(orders);
+                } catch (e) {
+                    attempts++;
+                    if (attempts > config.polling.retries) {
+                        this.flashMessages.danger('Ajaj, asi spadnul server. Zkus obnovit stránku.', {
+                            sticky: true,
+                        });
+                        return false;
                     }
-                }
-            } catch (e) {
-                attempts++;
-                if (attempts > config.polling.retries) {
-                    this.flashMessages.danger('Ajaj, asi spadnul server. Zkus obnovit stránku.', {
-                        sticky: true,
-                    });
-                    return false;
                 }
             }
         }
@@ -86,10 +71,56 @@ export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin, {}
         .restartable())
     pollForOrders;
 
+    /**
+     * Push Orders to Model and notify via browser notification
+     * In case there are no items in Model, transition to Index
+     * (recovery from error state)
+     * @param {Array} orders
+     */
+    _addNewOrdersToModel(orders) {
+        const model = this.controllerFor('index').get('model');
+
+        if (!model) {
+            this.controllerFor('index').set('model', orders);
+            this.transitionTo('index');
+        } else {
+            const modelOrderIds = model.map(order => order.id);
+
+            // add orders
+            model.addObjects(orders);
+
+            // notify if order is not present in the model already
+            const newOrders = orders.filter(order => !modelOrderIds.includes(order.id));
+            if (newOrders.length > 0) {
+                this.notifier.notify(
+                    newOrders.length === 1 ? 'Nová objednávka' : `Nové objednávky (${newOrders.length})`
+                );
+            }
+        }
+    }
+
+    /**
+     * Listen on socket `order.received` event, create Order record from that data and push it to the model
+     */
+    _realtimeOrderLoading() {
+        this.websocket.subscribe('orders', [
+            {
+                eventName: 'order.received',
+                eventHandler: data => {
+                    const modelClass = this.store.modelFor('order');
+                    const serializer = this.store.serializerFor('order');
+                    const normalized = serializer.normalizeQueryResponse(this.store, modelClass, data);
+
+                    this._addNewOrdersToModel(this.store.push(normalized));
+                },
+            },
+        ]);
+    }
+
     @action
     error() {
         // try to come back up
-        this.get('pollForOrders').perform();
+        this.pollForOrders.perform();
         return true;
     }
 }

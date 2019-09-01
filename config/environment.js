@@ -56,6 +56,11 @@ module.exports = function(environment) {
             retries: 5,
         },
 
+        pusher: {
+            appKey: process.env.PUSHER_APP_KEY,
+            appCluster: process.env.PUSHER_APP_CLUSTER,
+        },
+
         sentry: {
             dsn: process.env.SENTRY_DSN,
             debug: environment === 'development',
