@@ -30,8 +30,6 @@ export default class WebSocketService extends Service {
                 this.appLogger.log('Pusher connection limit error', err);
                 return;
             }
-
-            this.appLogger.log('Pusher connection error', err);
         });
 
         pusher.connection.bind('state_change', states => {

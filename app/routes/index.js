@@ -9,13 +9,12 @@ export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin, {}
     @service flashMessages;
     @service kitchenState;
     @service notifier;
-    @service websocket;
     @service store;
+    @service websocket;
 
     beforeModel() {
         super.beforeModel(...arguments);
 
-        // now when authenticate we can log out
         this.websocket.connect();
     }
 

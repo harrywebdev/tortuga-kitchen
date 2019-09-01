@@ -51,6 +51,14 @@
     }
 }
 
+.feed-layout__notifications {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 80%;
+}
+
 .feed-layout__on-off-switch {
     position: relative;
     top: 6px;
